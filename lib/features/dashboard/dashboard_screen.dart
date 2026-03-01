@@ -1,45 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:too_too/core/theme/colors.dart';
-import 'package:too_too/features/dashboard/models/toot.dart';
 import 'widgets/app_top_bar_widget.dart';
 import 'widgets/app_bottom_nav_widget.dart';
-import 'widgets/toots_list_widget.dart';
 
-class DashboardScreen extends StatefulWidget {
-  const DashboardScreen({super.key});
+class DashboardScreen extends StatelessWidget {
+  final StatefulNavigationShell navigationShell;
 
-  @override
-  State<DashboardScreen> createState() => _DashboardScreenState();
-}
-
-class _DashboardScreenState extends State<DashboardScreen> {
-  int _navIndex = 0;
+  const DashboardScreen({super.key, required this.navigationShell});
 
   @override
   Widget build(BuildContext context) {
-    final toots = Toot.mockToots();
-
     return Scaffold(
       backgroundColor: AppColors.background,
       body: SafeArea(
         child: Column(
           children: [
-            // ── Top Bar ──────────────────────────────────────────
             const AppTopBarWidget(),
 
-            // ── Feed ─────────────────────────────────────────────
-            Expanded(child: TootsListWidget(toots: toots)),
+            Expanded(child: navigationShell),
           ],
         ),
       ),
 
-      // ── Bottom Navigation ────────────────────────────────────
       bottomNavigationBar: AppBottomNavWidget(
-        currentIndex: _navIndex,
-        onTap: (index) => setState(() => _navIndex = index),
+        currentIndex: navigationShell.currentIndex,
+        onTap: (index) => navigationShell.goBranch(
+          index,
+          initialLocation: index == navigationShell.currentIndex,
+        ),
       ),
 
-      // ── FAB ──────────────────────────────────────────────────
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         child: const Icon(Icons.add, size: 28),

@@ -23,7 +23,6 @@ class Toot {
     this.stars = 0,
   });
 
-  /// Demo data that mirrors the screenshot.
   static List<Toot> mockToots() => const [
     Toot(
       id: '1',

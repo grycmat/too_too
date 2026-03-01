@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'core/di/service_locator.dart';
 import 'core/theme/theme.dart';
-import 'features/dashboard/dashboard_screen.dart';
+import 'core/routing/app_router.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await setupServiceLocator();
   runApp(const TooTooApp());
 }
 
@@ -11,11 +14,11 @@ class TooTooApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Too Too',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.darkTheme,
-      home: const DashboardScreen(),
+      routerConfig: appRouter,
     );
   }
 }

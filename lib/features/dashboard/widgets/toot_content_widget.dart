@@ -12,10 +12,8 @@ class TootContentWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // ── Body text with highlighted hashtags ─────────────────
         _HashtagRichText(text: content),
 
-        // ── Optional image ─────────────────────────────────────
         if (imageUrl != null) ...[
           const SizedBox(height: 12),
           ClipRRect(
@@ -65,7 +63,6 @@ class TootContentWidget extends StatelessWidget {
   }
 }
 
-/// Renders text with `#hashtags` in [AppColors.textHashtag].
 class _HashtagRichText extends StatelessWidget {
   final String text;
   const _HashtagRichText({required this.text});

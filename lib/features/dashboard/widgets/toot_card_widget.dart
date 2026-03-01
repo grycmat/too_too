@@ -31,7 +31,6 @@ class TootCardWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // ── Author row ─────────────────────────────────────
             AuthorWidget(
               name: toot.authorName,
               handle: toot.authorHandle,
@@ -41,12 +40,10 @@ class TootCardWidget extends StatelessWidget {
 
             const SizedBox(height: 12),
 
-            // ── Content + optional image ───────────────────────
             TootContentWidget(content: toot.content, imageUrl: toot.imageUrl),
 
             const SizedBox(height: 14),
 
-            // ── Action bar ─────────────────────────────────────
             TootActionsWidget(
               replies: toot.replies,
               retoots: toot.retoots,

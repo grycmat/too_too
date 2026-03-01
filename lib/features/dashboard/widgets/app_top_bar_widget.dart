@@ -13,10 +13,8 @@ class AppTopBarWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // ── Title ────────────────────────────────────────────
           Text(title, style: Theme.of(context).textTheme.headlineLarge),
 
-          // ── Profile avatar ───────────────────────────────────
           Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,

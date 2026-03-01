@@ -21,7 +21,6 @@ class AuthorWidget extends StatelessWidget {
 
     return Row(
       children: [
-        // ── Avatar ──────────────────────────────────────────────
         Container(
           decoration: BoxDecoration(
             shape: BoxShape.circle,
@@ -55,7 +54,6 @@ class AuthorWidget extends StatelessWidget {
 
         const SizedBox(width: 12),
 
-        // ── Name + Handle ──────────────────────────────────────
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,7 +65,6 @@ class AuthorWidget extends StatelessWidget {
           ),
         ),
 
-        // ── Timestamp ──────────────────────────────────────────
         Text(timestamp, style: tt.bodySmall),
       ],
     );

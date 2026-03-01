@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'colors.dart';
 
-/// Central app theme — cyberpunk / neon dark aesthetic.
 class AppTheme {
   AppTheme._();
 
@@ -22,7 +21,6 @@ class AppTheme {
         onError: AppColors.textPrimary,
       ),
 
-      // ── App Bar ────────────────────────────────────────────────
       appBarTheme: const AppBarTheme(
         backgroundColor: AppColors.background,
         foregroundColor: AppColors.textPrimary,
@@ -41,7 +39,6 @@ class AppTheme {
         ),
       ),
 
-      // ── Card ───────────────────────────────────────────────────
       cardTheme: CardThemeData(
         color: AppColors.card,
         elevation: 0,
@@ -52,41 +49,34 @@ class AppTheme {
         ),
       ),
 
-      // ── Text ───────────────────────────────────────────────────
       textTheme: const TextTheme(
-        // Screen titles (e.g. "FEED")
         headlineLarge: TextStyle(
           color: AppColors.textPrimary,
           fontSize: 26,
           fontWeight: FontWeight.w800,
           letterSpacing: 2,
         ),
-        // Card name / display name
         titleMedium: TextStyle(
           color: AppColors.textPrimary,
           fontSize: 16,
           fontWeight: FontWeight.w600,
         ),
-        // Username / handle
         titleSmall: TextStyle(
           color: AppColors.textSecondary,
           fontSize: 13,
           fontWeight: FontWeight.w400,
         ),
-        // Post body text
         bodyMedium: TextStyle(
           color: AppColors.textPrimary,
           fontSize: 14,
           fontWeight: FontWeight.w400,
           height: 1.4,
         ),
-        // Timestamps, secondary info
         bodySmall: TextStyle(
           color: AppColors.textSecondary,
           fontSize: 12,
           fontWeight: FontWeight.w400,
         ),
-        // Labels / captions
         labelMedium: TextStyle(
           color: AppColors.textSecondary,
           fontSize: 12,
@@ -94,7 +84,6 @@ class AppTheme {
         ),
       ),
 
-      // ── Bottom Navigation ──────────────────────────────────────
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         backgroundColor: AppColors.navBarBackground,
         selectedItemColor: AppColors.navBarSelected,
@@ -105,7 +94,6 @@ class AppTheme {
         showUnselectedLabels: false,
       ),
 
-      // ── Navigation Bar (Material 3) ───────────────────────────
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: AppColors.navBarBackground,
         indicatorColor: AppColors.primary.withValues(alpha: 0.15),
@@ -124,7 +112,6 @@ class AppTheme {
         labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
       ),
 
-      // ── Floating Action Button ─────────────────────────────────
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
         backgroundColor: AppColors.fab,
         foregroundColor: AppColors.fabIcon,
@@ -132,17 +119,14 @@ class AppTheme {
         shape: CircleBorder(),
       ),
 
-      // ── Icon ───────────────────────────────────────────────────
       iconTheme: const IconThemeData(color: AppColors.iconDefault, size: 22),
 
-      // ── Divider ────────────────────────────────────────────────
       dividerTheme: const DividerThemeData(
         color: AppColors.divider,
         thickness: 0.5,
         space: 0,
       ),
 
-      // ── Input (text fields) ────────────────────────────────────
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: AppColors.surface,
@@ -165,7 +149,6 @@ class AppTheme {
         ),
       ),
 
-      // ── Elevated Button ────────────────────────────────────────
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.primary,
@@ -183,7 +166,6 @@ class AppTheme {
         ),
       ),
 
-      // ── Outlined Button ────────────────────────────────────────
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           foregroundColor: AppColors.primary,
@@ -200,7 +182,6 @@ class AppTheme {
         ),
       ),
 
-      // ── Chip ───────────────────────────────────────────────────
       chipTheme: ChipThemeData(
         backgroundColor: AppColors.surface,
         selectedColor: AppColors.primary.withValues(alpha: 0.2),
@@ -213,7 +194,6 @@ class AppTheme {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       ),
 
-      // ── Dialog ─────────────────────────────────────────────────
       dialogTheme: DialogThemeData(
         backgroundColor: AppColors.surface,
         shape: RoundedRectangleBorder(
@@ -227,7 +207,6 @@ class AppTheme {
         ),
       ),
 
-      // ── Bottom Sheet ───────────────────────────────────────────
       bottomSheetTheme: const BottomSheetThemeData(
         backgroundColor: AppColors.surface,
         shape: RoundedRectangleBorder(
@@ -235,7 +214,6 @@ class AppTheme {
         ),
       ),
 
-      // ── Snack Bar ──────────────────────────────────────────────
       snackBarTheme: SnackBarThemeData(
         backgroundColor: AppColors.card,
         contentTextStyle: const TextStyle(color: AppColors.textPrimary),
