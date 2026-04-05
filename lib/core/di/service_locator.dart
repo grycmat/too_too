@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:too_too/shared/service/app_http_service.dart';
 import 'package:too_too/shared/service/auth_service.dart';
 import 'package:too_too/shared/service/oauth_callback_handler.dart';
+import 'package:too_too/shared/service/toots_api_service.dart';
 
 final getIt = GetIt.instance;
 
@@ -23,5 +24,9 @@ Future<void> setupServiceLocator() async {
       httpService: getIt<AppHttpService>(),
       callbackHandler: getIt<OAuthCallbackHandler>(),
     ),
+  );
+
+  getIt.registerSingleton<TootsApiService>(
+    TootsApiService(httpService: getIt<AppHttpService>()),
   );
 }

@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:too_too/core/theme/colors.dart';
-import 'package:too_too/features/dashboard/models/toot.dart';
+import 'package:too_too/features/dashboard/models/status.dart';
+import 'package:too_too/features/dashboard/utils/status_formatting.dart';
 import 'author_widget.dart';
 import 'toot_content_widget.dart';
 import 'toot_actions_widget.dart';
 
 class TootCardWidget extends StatelessWidget {
-  final Toot toot;
+  final Status status;
 
-  const TootCardWidget({super.key, required this.toot});
+  const TootCardWidget({super.key, required this.status});
 
   @override
   Widget build(BuildContext context) {
+    final s = status.reblog ?? status;
+
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
@@ -32,22 +35,27 @@ class TootCardWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AuthorWidget(
-              name: toot.authorName,
-              handle: toot.authorHandle,
-              avatarUrl: toot.authorAvatarUrl,
-              timestamp: toot.timestamp,
+              name: s.account.displayName.isNotEmpty
+                  ? s.account.displayName
+                  : s.account.username,
+              handle: '@${s.account.acct}',
+              avatarUrl: s.account.avatar.isNotEmpty ? s.account.avatar : null,
+              timestamp: relativeTime(s.createdAt),
             ),
 
             const SizedBox(height: 12),
 
-            TootContentWidget(content: toot.content, imageUrl: toot.imageUrl),
+            TootContentWidget(
+              content: htmlToPlainText(s.content),
+              imageUrl: firstImageUrl(s.mediaAttachments),
+            ),
 
             const SizedBox(height: 14),
 
             TootActionsWidget(
-              replies: toot.replies,
-              retoots: toot.retoots,
-              stars: toot.stars,
+              replies: s.repliesCount,
+              retoots: s.reblogsCount,
+              stars: s.favouritesCount,
             ),
           ],
         ),

@@ -2,7 +2,6 @@ import 'package:go_router/go_router.dart';
 import 'package:too_too/core/di/service_locator.dart';
 import 'package:too_too/features/dashboard/dashboard_screen.dart';
 import 'package:too_too/features/dashboard/widgets/toots_list_widget.dart';
-import 'package:too_too/features/dashboard/models/toot.dart';
 import 'package:too_too/features/login/login_screen.dart';
 import 'package:too_too/features/notifications/notifications_screen.dart';
 import 'package:too_too/features/explore/explore_screen.dart';
@@ -33,8 +32,7 @@ final GoRouter appRouter = GoRouter(
           routes: [
             GoRoute(
               path: '/',
-              builder: (context, state) =>
-                  TootsListWidget(toots: Toot.mockToots()),
+              builder: (context, state) => const TootsListWidget(),
             ),
           ],
         ),
