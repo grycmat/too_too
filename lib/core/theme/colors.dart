@@ -39,4 +39,7 @@ class AppColors {
 
   static const Color fab = Color(0xFF00E5FF);
   static const Color fabIcon = Color(0xFF0A0E1A);
+
+  static const Color inputBackground = Color(0xFF0B1120);
+  static const Color inputBorder = Color(0xFF00E5FF);
 }

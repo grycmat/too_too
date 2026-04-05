@@ -13,7 +13,7 @@ class AppHttpService {
   }
 
   void setBaseUrl(String instanceUrl) {
-    _dio.options.baseUrl = 'https://$instanceUrl/api/v1';
+    _dio.options.baseUrl = 'https://$instanceUrl';
   }
 
   void setAuthToken(String token) {
@@ -45,5 +45,9 @@ class AppHttpService {
 
   Future<Response<T>> patch<T>(String path, {dynamic data}) {
     return _dio.patch(path, data: data);
+  }
+
+  Future<Response<T>> postToUrl<T>(String fullUrl, {dynamic data}) {
+    return _dio.post(fullUrl, data: data);
   }
 }

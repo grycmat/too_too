@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'core/di/service_locator.dart';
 import 'core/theme/theme.dart';
 import 'core/routing/app_router.dart';
+import 'shared/service/auth_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setupServiceLocator();
+  await getIt<AuthService>().tryRestoreSession();
   runApp(const TooTooApp());
 }
 
