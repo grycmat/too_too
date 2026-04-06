@@ -232,6 +232,12 @@ class AppTheme {
         ),
       ),
 
+      progressIndicatorTheme: const ProgressIndicatorThemeData(
+        color: AppColors.primary,
+        linearTrackColor: AppColors.progressTrack,
+        linearMinHeight: 4,
+      ),
+
       snackBarTheme: SnackBarThemeData(
         backgroundColor: AppColors.card,
         contentTextStyle: const TextStyle(color: AppColors.textPrimary),

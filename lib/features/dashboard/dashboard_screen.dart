@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:too_too/core/theme/colors.dart';
+import 'package:too_too/features/new_toot/new_toot_screen.dart';
 import 'widgets/app_top_bar_widget.dart';
 import 'widgets/app_bottom_nav_widget.dart';
 
@@ -32,7 +33,14 @@ class DashboardScreen extends StatelessWidget {
       ),
 
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            isScrollControlled: true,
+            useSafeArea: true,
+            builder: (context) => const NewTootScreen(),
+          );
+        },
         child: const Icon(Icons.add, size: 28),
       ),
     );

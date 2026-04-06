@@ -5,8 +5,8 @@ import 'package:too_too/core/di/service_locator.dart';
 import 'package:too_too/core/widgets/app_text_field.dart';
 import 'package:too_too/core/widgets/glow_wrapper.dart';
 import 'package:too_too/shared/service/auth_service.dart';
+import 'package:too_too/shared/widgets/app_button.widget.dart';
 
-import 'widgets/login_button_widget.dart';
 import 'widgets/login_link_button_widget.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -84,8 +84,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 Text('NEON', style: theme.textTheme.headlineMedium),
                 const SizedBox(height: 4),
 
-                Text('DECENTRALIZED NETWORK',
-                    style: theme.textTheme.labelSmall),
+                Text(
+                  'DECENTRALIZED NETWORK',
+                  style: theme.textTheme.labelSmall,
+                ),
 
                 const SizedBox(height: 48),
 
@@ -100,7 +102,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 16),
                   Container(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 16, vertical: 12),
+                      horizontal: 16,
+                      vertical: 12,
+                    ),
                     decoration: BoxDecoration(
                       color: colorScheme.error.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(12),
@@ -110,8 +114,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     child: Row(
                       children: [
-                        Icon(Icons.error_outline,
-                            color: colorScheme.error, size: 20),
+                        Icon(
+                          Icons.error_outline,
+                          color: colorScheme.error,
+                          size: 20,
+                        ),
                         const SizedBox(width: 12),
                         Expanded(
                           child: Text(
@@ -156,10 +163,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ],
                       )
-                    : LoginButtonWidget(
-                        label: 'LOGIN',
-                        onPressed: _handleLogin,
-                      ),
+                    : AppButtonWidget(label: 'LOGIN', onPressed: _handleLogin),
 
                 const SizedBox(height: 24),
 

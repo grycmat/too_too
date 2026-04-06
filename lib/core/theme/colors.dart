@@ -42,4 +42,5 @@ class AppColors {
 
   static const Color inputBackground = Color(0xFF0B1120);
   static const Color inputBorder = Color(0xFF00E5FF);
+  static const Color progressTrack = Color(0xFF1E293B);
 }
