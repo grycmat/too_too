@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widget_previews.dart';
 import 'package:too_too/core/theme/colors.dart';
 
 class AppBottomNavWidget extends StatelessWidget {
   final int currentIndex;
   final ValueChanged<int>? onTap;
 
+  @Preview(name: 'Bottom Nav')
   const AppBottomNavWidget({super.key, this.currentIndex = 0, this.onTap});
 
   @override

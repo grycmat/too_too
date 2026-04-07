@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:too_too/core/theme/colors.dart';
 import 'package:too_too/features/dashboard/models/status.dart';
 import 'package:too_too/features/dashboard/utils/status_formatting.dart';
+
 import 'author_widget.dart';
-import 'toot_content_widget.dart';
 import 'toot_actions_widget.dart';
+import 'toot_content_widget.dart';
 
 class TootCardWidget extends StatelessWidget {
   final Status status;

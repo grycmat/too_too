@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:too_too/core/theme/colors.dart';
 
@@ -18,42 +19,19 @@ class TootContentWidget extends StatelessWidget {
           const SizedBox(height: 12),
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
-            child: Image.network(
-              imageUrl!,
-              width: double.infinity,
-              height: 180,
+            child: CachedNetworkImage(
               fit: BoxFit.cover,
-              loadingBuilder: (context, child, progress) {
-                if (progress == null) return child;
-                return Container(
-                  height: 180,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: AppColors.surface,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: CircularProgressIndicator(
-                    color: AppColors.primary,
-                    value: progress.expectedTotalBytes != null
-                        ? progress.cumulativeBytesLoaded /
-                              progress.expectedTotalBytes!
-                        : null,
-                  ),
-                );
-              },
-              errorBuilder: (context, error, stack) => Container(
+              height: 180,
+              width: double.infinity,
+              imageUrl: imageUrl!,
+              placeholder: (_, _) => Container(
                 height: 180,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   color: AppColors.surface,
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: AppColors.border),
                 ),
-                child: const Icon(
-                  Icons.broken_image_outlined,
-                  color: AppColors.textHint,
-                  size: 40,
-                ),
+                child: CircularProgressIndicator(color: AppColors.primary),
               ),
             ),
           ),

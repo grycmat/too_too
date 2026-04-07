@@ -6,8 +6,8 @@ import 'package:too_too/core/widgets/app_text_field.dart';
 import 'package:too_too/core/widgets/glow_wrapper.dart';
 import 'package:too_too/shared/service/auth_service.dart';
 import 'package:too_too/shared/widgets/app_button.widget.dart';
-
-import 'widgets/login_link_button_widget.dart';
+import 'package:too_too/shared/widgets/link_button.widget.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LoginScreen extends StatefulWidget {
   @Preview(name: 'Login Screen')
@@ -167,9 +167,17 @@ class _LoginScreenState extends State<LoginScreen> {
 
                 const SizedBox(height: 24),
 
-                LoginLinkButtonWidget(
+                LinkButtonWidget(
                   label: 'What is Mastodon?',
-                  onPressed: () {},
+                  onPressed: () async {
+                    final url = Uri.parse('https://joinmastodon.org/');
+                    if (!await launchUrl(
+                      url,
+                      mode: LaunchMode.externalApplication,
+                    )) {
+                      debugPrint('Could not launch $url');
+                    }
+                  },
                 ),
               ],
             ),

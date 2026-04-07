@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widget_previews.dart';
 import 'package:too_too/core/di/service_locator.dart';
 import 'package:too_too/core/theme/colors.dart';
 import 'package:too_too/core/widgets/neon_card_widget.dart';
 import 'package:too_too/core/widgets/status_chip_widget.dart';
 import 'package:too_too/shared/service/auth_service.dart';
 import 'package:too_too/shared/widgets/app_button.widget.dart';
+
 import 'widgets/media_action_card_widget.dart';
 
 class NewTootScreen extends StatefulWidget {
+  @Preview(name: 'New Toot Screen')
   const NewTootScreen({super.key});
 
   @override
