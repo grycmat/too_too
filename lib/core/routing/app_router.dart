@@ -6,6 +6,7 @@ import 'package:too_too/features/login/login_screen.dart';
 import 'package:too_too/features/notifications/notifications_screen.dart';
 import 'package:too_too/features/explore/explore_screen.dart';
 import 'package:too_too/features/profile/profile_screen.dart';
+import 'package:too_too/features/status_details/status_details_screen.dart';
 import 'package:too_too/shared/service/auth_service.dart';
 
 final GoRouter appRouter = GoRouter(
@@ -33,6 +34,14 @@ final GoRouter appRouter = GoRouter(
             GoRoute(
               path: '/',
               builder: (context, state) => const TootsListWidget(),
+              routes: [
+                GoRoute(
+                  path: 'status/:id',
+                  builder: (context, state) => StatusDetailsScreen(
+                    statusId: state.pathParameters['id']!,
+                  ),
+                ),
+              ],
             ),
           ],
         ),
@@ -51,6 +60,14 @@ final GoRouter appRouter = GoRouter(
             GoRoute(
               path: '/explore',
               builder: (context, state) => const ExploreScreen(),
+              routes: [
+                GoRoute(
+                  path: 'status/:id',
+                  builder: (context, state) => StatusDetailsScreen(
+                    statusId: state.pathParameters['id']!,
+                  ),
+                ),
+              ],
             ),
           ],
         ),
@@ -60,6 +77,14 @@ final GoRouter appRouter = GoRouter(
             GoRoute(
               path: '/profile',
               builder: (context, state) => const ProfileScreen(),
+              routes: [
+                GoRoute(
+                  path: 'status/:id',
+                  builder: (context, state) => StatusDetailsScreen(
+                    statusId: state.pathParameters['id']!,
+                  ),
+                ),
+              ],
             ),
           ],
         ),

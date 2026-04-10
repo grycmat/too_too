@@ -18,7 +18,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final _instanceController = TextEditingController(text: 'mastodon.social');
+  final _instanceController = TextEditingController();
   bool _isLoading = false;
   String? _error;
 

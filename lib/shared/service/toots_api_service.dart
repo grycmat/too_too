@@ -1,4 +1,5 @@
 import 'package:too_too/features/dashboard/models/status.dart';
+import 'package:too_too/features/dashboard/models/status_context.dart';
 import 'package:too_too/features/dashboard/models/notification.dart';
 import 'app_http_service.dart';
 
@@ -92,5 +93,29 @@ class TootsApiService {
     return (response.data ?? const [])
         .map((j) => Status.fromJson(j as Map<String, dynamic>))
         .toList();
+  }
+
+  Future<Status> getStatusDetails(String id) async {
+    final response = await _http.get<Map<String, dynamic>>(
+      '/api/v1/statuses/$id',
+    );
+
+    if (response.data == null) {
+      throw Exception('Failed to load status details: response data is null');
+    }
+
+    return Status.fromJson(response.data!);
+  }
+
+  Future<StatusContext> getStatusContext(String id) async {
+    final response = await _http.get<Map<String, dynamic>>(
+      '/api/v1/statuses/$id/context',
+    );
+
+    if (response.data == null) {
+      throw Exception('Failed to load status context: response data is null');
+    }
+
+    return StatusContext.fromJson(response.data!);
   }
 }
