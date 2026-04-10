@@ -5,10 +5,20 @@ import 'package:too_too/features/dashboard/models/status.dart';
 import 'package:too_too/shared/service/toots_api_service.dart';
 import 'toot_card_widget.dart';
 
+enum TimelineType { home, public, account }
+
 class TootsListWidget extends StatefulWidget {
+  final TimelineType timelineType;
   final String? accountId;
 
-  const TootsListWidget({super.key, this.accountId});
+  const TootsListWidget({
+    super.key,
+    this.timelineType = TimelineType.home,
+    this.accountId,
+  }) : assert(
+          timelineType != TimelineType.account || accountId != null,
+          'accountId must be provided when timelineType is account',
+        );
 
   @override
   State<TootsListWidget> createState() => _TootsListWidgetState();
@@ -31,9 +41,18 @@ class _TootsListWidgetState extends State<TootsListWidget> {
       _error = null;
     });
     try {
-      final result = widget.accountId != null
-          ? await getIt<TootsApiService>().getAccountStatuses(widget.accountId!)
-          : await getIt<TootsApiService>().getUserTimeline();
+      final List<Status> result;
+      switch (widget.timelineType) {
+        case TimelineType.home:
+          result = await getIt<TootsApiService>().getUserTimeline();
+          break;
+        case TimelineType.public:
+          result = await getIt<TootsApiService>().getPublicTimeline();
+          break;
+        case TimelineType.account:
+          result = await getIt<TootsApiService>().getAccountStatuses(widget.accountId!);
+          break;
+      }
       if (!mounted) return;
       setState(() {
         _statuses = result;

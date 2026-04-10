@@ -36,6 +36,7 @@ class TootCardWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AuthorWidget(
+              accountId: s.account.id,
               name: s.account.displayName.isNotEmpty
                   ? s.account.displayName
                   : s.account.username,

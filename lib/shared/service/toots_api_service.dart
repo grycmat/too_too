@@ -28,6 +28,29 @@ class TootsApiService {
         .toList();
   }
 
+  Future<List<Status>> getPublicTimeline({
+    String? maxId,
+    String? sinceId,
+    String? minId,
+    int limit = 20,
+    bool local = false,
+  }) async {
+    final response = await _http.get<List<dynamic>>(
+      '/api/v1/timelines/public',
+      queryParameters: {
+        if (maxId != null) 'max_id': maxId,
+        if (sinceId != null) 'since_id': sinceId,
+        if (minId != null) 'min_id': minId,
+        'limit': limit,
+        'local': local,
+      },
+    );
+
+    return (response.data ?? const [])
+        .map((j) => Status.fromJson(j as Map<String, dynamic>))
+        .toList();
+  }
+
   Future<List<Notification>> getAllNotifications({
     String? maxId,
     String? sinceId,

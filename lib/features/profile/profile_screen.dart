@@ -3,11 +3,11 @@ import 'package:too_too/core/di/service_locator.dart';
 import 'package:too_too/core/theme/colors.dart';
 import 'package:too_too/features/dashboard/models/status.dart';
 import 'package:too_too/shared/service/user_service.dart';
-import 'package:too_too/features/dashboard/widgets/toots_list_widget.dart';
-import 'widgets/profile_header_widget.dart';
+import 'widgets/account_widget.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+  final String? accountId;
+  const ProfileScreen({super.key, this.accountId});
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -19,7 +19,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
     super.initState();
-    _accountFuture = getIt<UserService>().getCurrentAccount();
+    if (widget.accountId != null) {
+      _accountFuture = getIt<UserService>().getAccount(widget.accountId!);
+    } else {
+      _accountFuture = getIt<UserService>().getCurrentAccount();
+    }
   }
 
   @override
@@ -52,67 +56,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
           final account = snapshot.data!;
 
-          return DefaultTabController(
-            length: 3,
-            child: NestedScrollView(
-              headerSliverBuilder: (context, innerBoxIsScrolled) {
-                return [
-                  SliverToBoxAdapter(
-                    child: ProfileHeaderWidget(account: account),
-                  ),
-                  SliverPersistentHeader(
-                    pinned: true,
-                    delegate: _SliverAppBarDelegate(
-                      const TabBar(
-                        indicatorColor: AppColors.primary,
-                        labelColor: AppColors.primary,
-                        unselectedLabelColor: AppColors.textHint,
-                        tabs: [
-                          Tab(text: 'TOOTS'),
-                          Tab(text: 'MEDIA'),
-                          Tab(text: 'LIKES'),
-                        ],
-                      ),
-                    ),
-                  ),
-                ];
-              },
-              body: TabBarView(
-                children: [
-                  TootsListWidget(accountId: account.id), // Pass user ID to fetch just their toots
-                  const Center(child: Text('MEDIA - Coming Soon', style: TextStyle(color: AppColors.textHint))),
-                  const Center(child: Text('LIKES - Coming Soon', style: TextStyle(color: AppColors.textHint))),
-                ],
-              ),
-            ),
-          );
+          return AccountWidget(account: account);
         },
       ),
     );
-  }
-}
-
-class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
-  _SliverAppBarDelegate(this._tabBar);
-
-  final TabBar _tabBar;
-
-  @override
-  double get minExtent => _tabBar.preferredSize.height;
-  @override
-  double get maxExtent => _tabBar.preferredSize.height;
-
-  @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return Container(
-      color: AppColors.background,
-      child: _tabBar,
-    );
-  }
-
-  @override
-  bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
-    return false;
   }
 }

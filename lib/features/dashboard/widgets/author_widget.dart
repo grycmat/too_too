@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:too_too/core/theme/colors.dart';
+import 'package:too_too/features/profile/profile_screen.dart';
 
 class AuthorWidget extends StatelessWidget {
+  final String accountId;
   final String name;
   final String handle;
   final String? avatarUrl;
@@ -9,6 +11,7 @@ class AuthorWidget extends StatelessWidget {
 
   const AuthorWidget({
     super.key,
+    required this.accountId,
     required this.name,
     required this.handle,
     this.avatarUrl,
@@ -19,7 +22,16 @@ class AuthorWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final tt = Theme.of(context).textTheme;
 
-    return Row(
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ProfileScreen(accountId: accountId),
+          ),
+        );
+      },
+      child: Row(
       children: [
         Container(
           decoration: BoxDecoration(
@@ -67,6 +79,7 @@ class AuthorWidget extends StatelessWidget {
 
         Text(timestamp, style: tt.bodySmall),
       ],
+    ),
     );
   }
 }
