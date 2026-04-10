@@ -14,8 +14,8 @@ class StatusHeroWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final s = status.reblog ?? status;
-    final String domain = s.account.acct.contains('@') 
-        ? s.account.acct.split('@').last 
+    final String domain = s.account.acct.contains('@')
+        ? s.account.acct.split('@').last
         : 'LOCAL';
 
     return Container(
@@ -45,12 +45,17 @@ class StatusHeroWidget extends StatelessWidget {
                       ? s.account.displayName
                       : s.account.username,
                   handle: '@${s.account.acct}',
-                  avatarUrl: s.account.avatar.isNotEmpty ? s.account.avatar : null,
+                  avatarUrl: s.account.avatar.isNotEmpty
+                      ? s.account.avatar
+                      : null,
                   timestamp: '', // Hide default timestamp
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 4,
+                ),
                 decoration: BoxDecoration(
                   color: AppColors.surface,
                   border: Border.all(color: AppColors.primary, width: 1),
@@ -99,7 +104,7 @@ class StatusHeroWidget extends StatelessWidget {
 extension StatusApplicationExtension on Status {
   // Assuming Application object is not fully modeled, we can fallback to generic text or extract it if needed.
   // We'll keep it simple by returning null for now, or you could extend the Status model to parse 'application'.
-  Application? get application => null; 
+  Application? get application => null;
 }
 
 class Application {

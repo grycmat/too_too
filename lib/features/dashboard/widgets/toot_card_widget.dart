@@ -20,8 +20,8 @@ class TootCardWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         final location = GoRouterState.of(context).matchedLocation;
-        final path = location == '/' 
-            ? '/status/${s.id}' 
+        final path = location == '/'
+            ? '/status/${s.id}'
             : '$location/status/${s.id}';
         context.push(path);
       },
@@ -50,7 +50,9 @@ class TootCardWidget extends StatelessWidget {
                     ? s.account.displayName
                     : s.account.username,
                 handle: '@${s.account.acct}',
-                avatarUrl: s.account.avatar.isNotEmpty ? s.account.avatar : null,
+                avatarUrl: s.account.avatar.isNotEmpty
+                    ? s.account.avatar
+                    : null,
                 timestamp: relativeTime(s.createdAt),
               ),
 
@@ -75,4 +77,3 @@ class TootCardWidget extends StatelessWidget {
     );
   }
 }
-
