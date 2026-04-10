@@ -6,7 +6,9 @@ import 'package:too_too/shared/service/toots_api_service.dart';
 import 'toot_card_widget.dart';
 
 class TootsListWidget extends StatefulWidget {
-  const TootsListWidget({super.key});
+  final String? accountId;
+
+  const TootsListWidget({super.key, this.accountId});
 
   @override
   State<TootsListWidget> createState() => _TootsListWidgetState();
@@ -29,7 +31,9 @@ class _TootsListWidgetState extends State<TootsListWidget> {
       _error = null;
     });
     try {
-      final result = await getIt<TootsApiService>().getUserTimeline();
+      final result = widget.accountId != null
+          ? await getIt<TootsApiService>().getAccountStatuses(widget.accountId!)
+          : await getIt<TootsApiService>().getUserTimeline();
       if (!mounted) return;
       setState(() {
         _statuses = result;

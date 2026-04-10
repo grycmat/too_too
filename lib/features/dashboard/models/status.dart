@@ -76,6 +76,12 @@ class Account {
   final String avatar;
   final String avatarStatic;
   final String url;
+  final String header;
+  final String headerStatic;
+  final String note;
+  final int statusesCount;
+  final int followingCount;
+  final int followersCount;
 
   const Account({
     required this.id,
@@ -85,6 +91,12 @@ class Account {
     required this.avatar,
     required this.avatarStatic,
     required this.url,
+    required this.header,
+    required this.headerStatic,
+    required this.note,
+    required this.statusesCount,
+    required this.followingCount,
+    required this.followersCount,
   });
 
   factory Account.fromJson(Map<String, dynamic> json) {
@@ -96,6 +108,12 @@ class Account {
       avatar: json['avatar'] as String? ?? '',
       avatarStatic: json['avatar_static'] as String? ?? '',
       url: json['url'] as String? ?? '',
+      header: json['header'] as String? ?? '',
+      headerStatic: json['header_static'] as String? ?? '',
+      note: json['note'] as String? ?? '',
+      statusesCount: json['statuses_count'] as int? ?? 0,
+      followingCount: json['following_count'] as int? ?? 0,
+      followersCount: json['followers_count'] as int? ?? 0,
     );
   }
 }

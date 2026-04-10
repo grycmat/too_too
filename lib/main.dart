@@ -3,11 +3,16 @@ import 'core/di/service_locator.dart';
 import 'core/theme/theme.dart';
 import 'core/routing/app_router.dart';
 import 'shared/service/auth_service.dart';
+import 'shared/service/user_service.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setupServiceLocator();
-  await getIt<AuthService>().tryRestoreSession();
+  final isLogged = await getIt<AuthService>().tryRestoreSession();
+  if (isLogged) {
+    await getIt<UserService>().getCurrentUserProfile();
+  }
   runApp(const TooTooApp());
 }
 

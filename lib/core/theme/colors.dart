@@ -14,6 +14,7 @@ class AppColors {
 
   static const Color secondary = Color(0xFFFF00E5);
   static const Color secondaryVariant = Color(0xFFD400BE);
+  static const Color secondaryGlow = Color(0x55FF00E5);
 
   static const Color accent = Color(0xFF39FF14);
 
