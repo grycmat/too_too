@@ -45,8 +45,6 @@ class _HashtagRichText extends StatelessWidget {
   final String text;
   const _HashtagRichText({required this.text});
 
-  static final _hashtagRegex = RegExp(r'#\w+');
-
   @override
   Widget build(BuildContext context) {
     final style = Theme.of(context).textTheme.bodyMedium!;
@@ -54,20 +52,29 @@ class _HashtagRichText extends StatelessWidget {
       color: AppColors.textHashtag,
       fontWeight: FontWeight.w600,
     );
+    final mentionStyle = style.copyWith(
+      color: AppColors.secondary,
+      fontWeight: FontWeight.w600,
+    );
 
     final spans = <TextSpan>[];
-    int lastEnd = 0;
+    final splits = text.split(' ');
 
-    for (final match in _hashtagRegex.allMatches(text)) {
-      if (match.start > lastEnd) {
-        spans.add(TextSpan(text: text.substring(lastEnd, match.start)));
+    for (final split in splits) {
+      if (split.startsWith('@')) {
+        spans.add(TextSpan(text: split, style: mentionStyle));
+        spans.add(TextSpan(text: ' ', style: style));
+
+        continue;
       }
-      spans.add(TextSpan(text: match.group(0), style: hashtagStyle));
-      lastEnd = match.end;
-    }
+      if (split.startsWith('#')) {
+        spans.add(TextSpan(text: split, style: hashtagStyle));
+        spans.add(TextSpan(text: ' ', style: style));
 
-    if (lastEnd < text.length) {
-      spans.add(TextSpan(text: text.substring(lastEnd)));
+        continue;
+      }
+      spans.add(TextSpan(text: split, style: style));
+      spans.add(TextSpan(text: ' ', style: style));
     }
 
     return RichText(

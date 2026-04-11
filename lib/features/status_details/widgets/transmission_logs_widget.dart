@@ -35,7 +35,6 @@ class TransmissionLogsWidget extends StatelessWidget {
           ...replies.asMap().entries.map((entry) {
             return GestureDetector(
               onTap: () {
-                final location = GoRouterState.of(context).matchedLocation;
                 final path = '/status/${entry.value.id}';
                 context.push(path);
               },
