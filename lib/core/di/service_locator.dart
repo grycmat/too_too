@@ -6,7 +6,7 @@ import 'package:too_too/shared/service/auth_service.dart';
 import 'package:too_too/shared/service/oauth_callback_handler.dart';
 import 'package:too_too/shared/service/toots_api_service.dart';
 import 'package:too_too/shared/service/user_service.dart';
-
+import 'package:too_too/shared/service/user_settings_service.dart';
 
 final getIt = GetIt.instance;
 
@@ -34,5 +34,9 @@ Future<void> setupServiceLocator() async {
 
   getIt.registerSingleton<UserService>(
     UserService(httpService: getIt<AppHttpService>()),
+  );
+
+  getIt.registerSingleton<UserSettingsService>(
+    UserSettingsService(prefs: getIt<SharedPreferences>()),
   );
 }

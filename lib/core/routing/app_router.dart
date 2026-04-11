@@ -2,10 +2,11 @@ import 'package:go_router/go_router.dart';
 import 'package:too_too/core/di/service_locator.dart';
 import 'package:too_too/features/dashboard/dashboard_screen.dart';
 import 'package:too_too/features/dashboard/widgets/toots_list_widget.dart';
+import 'package:too_too/features/explore/explore_screen.dart';
 import 'package:too_too/features/login/login_screen.dart';
 import 'package:too_too/features/notifications/notifications_screen.dart';
-import 'package:too_too/features/explore/explore_screen.dart';
 import 'package:too_too/features/profile/profile_screen.dart';
+import 'package:too_too/features/settings/settings_screen.dart';
 import 'package:too_too/features/status_details/status_details_screen.dart';
 import 'package:too_too/shared/service/auth_service.dart';
 
@@ -23,6 +24,11 @@ final GoRouter appRouter = GoRouter(
   },
   routes: [
     GoRoute(path: '/login', builder: (context, state) => const LoginScreen()),
+    GoRoute(
+      name: '/settings',
+      path: '/settings',
+      builder: (context, state) => const SettingsScreen(),
+    ),
 
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {
