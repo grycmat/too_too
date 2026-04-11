@@ -9,7 +9,7 @@ class AppTopBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 8, 20, 4),
+      padding: const EdgeInsets.fromLTRB(20, 20, 20, 4),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -20,25 +20,6 @@ class AppTopBarWidget extends StatelessWidget {
             },
             icon: Icon(Icons.settings_rounded),
           ),
-
-          // Container(
-          //   decoration: BoxDecoration(
-          //     shape: BoxShape.circle,
-          //     border: Border.all(color: AppColors.glowBorder, width: 1.5),
-          //     boxShadow: [
-          //       BoxShadow(
-          //         color: AppColors.primaryGlow,
-          //         blurRadius: 10,
-          //         spreadRadius: 1,
-          //       ),
-          //     ],
-          //   ),
-          //   child: const CircleAvatar(
-          //     radius: 18,
-          //     backgroundColor: AppColors.surface,
-          //     child: Icon(Icons.person, color: AppColors.primary, size: 20),
-          //   ),
-          // ),
         ],
       ),
     );

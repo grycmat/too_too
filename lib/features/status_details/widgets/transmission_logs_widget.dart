@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:too_too/core/theme/colors.dart';
 import 'package:too_too/features/dashboard/models/status.dart';
 import 'package:too_too/features/status_details/widgets/transmission_log_reply_widget.dart';
@@ -32,9 +33,16 @@ class TransmissionLogsWidget extends StatelessWidget {
           ),
           const SizedBox(height: 24),
           ...replies.asMap().entries.map((entry) {
-            return TransmissionLogReplyWidget(
-              reply: entry.value,
-              isLast: entry.key == replies.length - 1,
+            return GestureDetector(
+              onTap: () {
+                final location = GoRouterState.of(context).matchedLocation;
+                final path = '/status/${entry.value.id}';
+                context.push(path);
+              },
+              child: TransmissionLogReplyWidget(
+                reply: entry.value,
+                isLast: entry.key == replies.length - 1,
+              ),
             );
           }),
           const SizedBox(height: 32),
