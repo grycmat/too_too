@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:dio/dio.dart';
 import 'package:too_too/features/dashboard/models/status.dart';
 import 'package:too_too/features/dashboard/models/status_context.dart';
 import 'package:too_too/features/dashboard/models/notification.dart';
@@ -118,4 +121,60 @@ class TootsApiService {
 
     return StatusContext.fromJson(response.data!);
   }
+
+  /// Uploads a media file via POST /api/v2/media.
+  /// Returns the media attachment ID.
+  Future<String> uploadMedia(File file) async {
+    final formData = FormData.fromMap({
+      'file': await MultipartFile.fromFile(
+        file.path,
+        filename: file.path.split(Platform.pathSeparator).last,
+      ),
+    });
+
+    final response = await _http.postMultipart<Map<String, dynamic>>(
+      '/api/v2/media',
+      data: formData,
+    );
+
+    if (response.data == null || response.data!['id'] == null) {
+      throw Exception('Failed to upload media: response data is null');
+    }
+
+    return response.data!['id'] as String;
+  }
+
+  /// Posts a new status via POST /api/v1/statuses.
+  /// [status] is the text content.
+  /// [mediaIds] is an optional list of media attachment IDs.
+  /// [visibility] is one of: public, unlisted, private, direct.
+  /// [spoilerText] is an optional content warning.
+  Future<Status> postStatus({
+    required String status,
+    List<String>? mediaIds,
+    String visibility = 'public',
+    String? spoilerText,
+    String? inReplyToId,
+  }) async {
+    final body = <String, dynamic>{
+      'status': status,
+      'visibility': visibility,
+      if (mediaIds != null && mediaIds.isNotEmpty) 'media_ids': mediaIds,
+      if (spoilerText != null && spoilerText.isNotEmpty)
+        'spoiler_text': spoilerText,
+      if (inReplyToId != null) 'in_reply_to_id': inReplyToId,
+    };
+
+    final response = await _http.post<Map<String, dynamic>>(
+      '/api/v1/statuses',
+      data: body,
+    );
+
+    if (response.data == null) {
+      throw Exception('Failed to post status: response data is null');
+    }
+
+    return Status.fromJson(response.data!);
+  }
 }
+

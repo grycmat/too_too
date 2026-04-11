@@ -47,6 +47,10 @@ class AppHttpService {
     return _dio.patch(path, data: data);
   }
 
+  Future<Response<T>> postMultipart<T>(String path, {required FormData data}) {
+    return _dio.post(path, data: data);
+  }
+
   Future<Response<T>> postToUrl<T>(String fullUrl, {dynamic data}) {
     return _dio.post(fullUrl, data: data);
   }
