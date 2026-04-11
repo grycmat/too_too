@@ -13,35 +13,45 @@ class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       backgroundColor: AppColors.background,
-      body: SafeArea(
-        child: Column(
-          children: [
-            const AppTopBarWidget(),
+      body: Stack(
+        children: [
+          Column(
+            children: [
+              const AppTopBarWidget(),
 
-            Expanded(child: navigationShell),
-          ],
-        ),
-      ),
-
-      bottomNavigationBar: AppBottomNavWidget(
-        currentIndex: navigationShell.currentIndex,
-        onTap: (index) => navigationShell.goBranch(
-          index,
-          initialLocation: index == navigationShell.currentIndex,
-        ),
-      ),
-
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showModalBottomSheet(
-            context: context,
-            isScrollControlled: true,
-            useSafeArea: true,
-            builder: (context) => const NewTootScreen(),
-          );
-        },
-        child: const Icon(Icons.add, size: 28),
+              Expanded(child: navigationShell),
+            ],
+          ),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: AppBottomNavWidget(
+              currentIndex: navigationShell.currentIndex,
+              onTap: (index) => navigationShell.goBranch(
+                index,
+                initialLocation: index == navigationShell.currentIndex,
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 80,
+            right: 20,
+            child: FloatingActionButton(
+              onPressed: () {
+                showModalBottomSheet(
+                  context: context,
+                  isScrollControlled: true,
+                  useSafeArea: true,
+                  builder: (context) => const NewTootScreen(),
+                );
+              },
+              child: const Icon(Icons.add, size: 28),
+            ),
+          ),
+        ],
       ),
     );
   }
