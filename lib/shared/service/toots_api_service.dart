@@ -176,5 +176,61 @@ class TootsApiService {
 
     return Status.fromJson(response.data!);
   }
+
+  /// Favourite a status via POST /api/v1/statuses/:id/favourite.
+  /// Returns the updated [Status] with `favourited: true`.
+  Future<Status> favouriteStatus(String id) async {
+    final response = await _http.post<Map<String, dynamic>>(
+      '/api/v1/statuses/$id/favourite',
+    );
+
+    if (response.data == null) {
+      throw Exception('Failed to favourite status: response data is null');
+    }
+
+    return Status.fromJson(response.data!);
+  }
+
+  /// Undo favourite via POST /api/v1/statuses/:id/unfavourite.
+  /// Returns the updated [Status] with `favourited: false`.
+  Future<Status> unfavouriteStatus(String id) async {
+    final response = await _http.post<Map<String, dynamic>>(
+      '/api/v1/statuses/$id/unfavourite',
+    );
+
+    if (response.data == null) {
+      throw Exception('Failed to unfavourite status: response data is null');
+    }
+
+    return Status.fromJson(response.data!);
+  }
+
+  /// Boost (reblog) a status via POST /api/v1/statuses/:id/reblog.
+  /// Returns the reblog [Status] wrapper with `reblogged: true`.
+  Future<Status> reblogStatus(String id) async {
+    final response = await _http.post<Map<String, dynamic>>(
+      '/api/v1/statuses/$id/reblog',
+    );
+
+    if (response.data == null) {
+      throw Exception('Failed to boost status: response data is null');
+    }
+
+    return Status.fromJson(response.data!);
+  }
+
+  /// Undo boost via POST /api/v1/statuses/:id/unreblog.
+  /// Returns the original [Status] with `reblogged: false`.
+  Future<Status> unreblogStatus(String id) async {
+    final response = await _http.post<Map<String, dynamic>>(
+      '/api/v1/statuses/$id/unreblog',
+    );
+
+    if (response.data == null) {
+      throw Exception('Failed to unboost status: response data is null');
+    }
+
+    return Status.fromJson(response.data!);
+  }
 }
 
