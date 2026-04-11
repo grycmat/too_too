@@ -42,6 +42,10 @@ class DashboardScreen extends StatelessWidget {
             child: FloatingActionButton(
               onPressed: () {
                 showModalBottomSheet(
+                  showDragHandle: true,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
                   context: context,
                   isScrollControlled: true,
                   useSafeArea: true,
