@@ -7,23 +7,22 @@ import 'package:too_too/features/dashboard/widgets/toot_content_widget.dart';
 class NotificationCardWidget extends StatelessWidget {
   final model.Notification notification;
 
-  const NotificationCardWidget({
-    super.key,
-    required this.notification,
-  });
+  const NotificationCardWidget({super.key, required this.notification});
 
   @override
   Widget build(BuildContext context) {
-    if (notification.type == 'mention') {
-      return _buildMentionCard(context);
-    } else if (notification.type == 'reblog') {
-      return _buildReblogCard(context);
-    } else if (notification.type == 'favourite') {
-      return _buildFavouriteCard(context);
-    } else if (notification.type == 'follow') {
-      return _buildFollowCard(context);
+    switch (notification.type) {
+      case 'mention':
+        return _buildMentionCard(context);
+      case 'reblog':
+        return _buildReblogCard(context);
+      case 'favourite':
+        return _buildFavouriteCard(context);
+      case 'follow':
+        return _buildFollowCard(context);
+      default:
+        return const SizedBox.shrink();
     }
-    return const SizedBox.shrink();
   }
 
   Widget _buildWrapper({
@@ -92,10 +91,7 @@ class NotificationCardWidget extends StatelessWidget {
               ),
               Text(
                 relativeTime(notification.createdAt),
-                style: const TextStyle(
-                  color: AppColors.textHint,
-                  fontSize: 12,
-                ),
+                style: const TextStyle(color: AppColors.textHint, fontSize: 12),
               ),
             ],
           ),
@@ -104,7 +100,11 @@ class NotificationCardWidget extends StatelessWidget {
           const SizedBox(height: 12),
           Row(
             children: [
-              const Icon(Icons.alternate_email, size: 16, color: AppColors.primary),
+              const Icon(
+                Icons.alternate_email,
+                size: 16,
+                color: AppColors.primary,
+              ),
               const SizedBox(width: 16),
               const Icon(Icons.reply, size: 16, color: AppColors.textHint),
               const SizedBox(width: 16),
@@ -127,7 +127,10 @@ class NotificationCardWidget extends StatelessWidget {
         children: [
           RichText(
             text: TextSpan(
-              style: const TextStyle(color: AppColors.textSecondary, fontSize: 14),
+              style: const TextStyle(
+                color: AppColors.textSecondary,
+                fontSize: 14,
+              ),
               children: [
                 TextSpan(
                   text: notification.account.displayName.isNotEmpty
@@ -167,6 +170,8 @@ class NotificationCardWidget extends StatelessWidget {
   }
 
   Widget _buildFavouriteCard(BuildContext context) {
+    final status = notification.status;
+
     return _buildWrapper(
       context: context,
       isPrimary: true,
@@ -176,7 +181,10 @@ class NotificationCardWidget extends StatelessWidget {
         children: [
           RichText(
             text: TextSpan(
-              style: const TextStyle(color: AppColors.textSecondary, fontSize: 14),
+              style: const TextStyle(
+                color: AppColors.textSecondary,
+                fontSize: 14,
+              ),
               children: [
                 TextSpan(
                   text: notification.account.displayName.isNotEmpty
@@ -201,6 +209,25 @@ class NotificationCardWidget extends StatelessWidget {
               fontWeight: FontWeight.w600,
             ),
           ),
+          const SizedBox(height: 12),
+          if (status != null)
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: AppColors.background,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Text(
+                '"${htmlToPlainText(status.content)}"',
+                style: const TextStyle(
+                  color: AppColors.textSecondary,
+                  fontStyle: FontStyle.italic,
+                  height: 1.4,
+                ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
         ],
       ),
     );
@@ -248,11 +275,23 @@ class NotificationCardWidget extends StatelessWidget {
               onPressed: () {},
               style: OutlinedButton.styleFrom(
                 foregroundColor: AppColors.textPrimary,
-                side: const BorderSide(color: AppColors.secondaryVariant, width: 1),
+                side: const BorderSide(
+                  color: AppColors.secondaryVariant,
+                  width: 1,
+                ),
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(6),
+                ),
               ),
-              child: const Text('FOLLOW BACK', style: TextStyle(fontSize: 11, letterSpacing: 0.5, fontWeight: FontWeight.w700)),
+              child: const Text(
+                'FOLLOW BACK',
+                style: TextStyle(
+                  fontSize: 11,
+                  letterSpacing: 0.5,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
             ),
           ),
         ],
@@ -289,11 +328,7 @@ class _NotificationAvatar extends StatelessWidget {
               borderRadius: BorderRadius.circular(14),
               border: Border.all(color: color, width: 1.5),
               boxShadow: [
-                BoxShadow(
-                  color: glow,
-                  blurRadius: 10,
-                  spreadRadius: 1,
-                ),
+                BoxShadow(color: glow, blurRadius: 10, spreadRadius: 1),
               ],
               image: avatarUrl.isNotEmpty
                   ? DecorationImage(
@@ -302,9 +337,7 @@ class _NotificationAvatar extends StatelessWidget {
                     )
                   : null,
             ),
-            child: avatarUrl.isEmpty
-                ? Icon(Icons.person, color: color)
-                : null,
+            child: avatarUrl.isEmpty ? Icon(Icons.person, color: color) : null,
           ),
           Positioned(
             right: 0,
@@ -316,11 +349,7 @@ class _NotificationAvatar extends StatelessWidget {
                 shape: BoxShape.circle,
                 border: Border.all(color: color, width: 1.2),
               ),
-              child: Icon(
-                badgeIcon,
-                size: 14,
-                color: color,
-              ),
+              child: Icon(badgeIcon, size: 14, color: color),
             ),
           ),
         ],
