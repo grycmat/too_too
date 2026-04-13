@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'package:too_too/core/di/service_locator.dart';
 import 'package:too_too/core/theme/colors.dart';
 import 'package:too_too/features/dashboard/models/status.dart';
@@ -16,9 +17,9 @@ class TootsListWidget extends StatefulWidget {
     this.timelineType = TimelineType.home,
     this.accountId,
   }) : assert(
-          timelineType != TimelineType.account || accountId != null,
-          'accountId must be provided when timelineType is account',
-        );
+         timelineType != TimelineType.account || accountId != null,
+         'accountId must be provided when timelineType is account',
+       );
 
   @override
   State<TootsListWidget> createState() => _TootsListWidgetState();
@@ -50,7 +51,9 @@ class _TootsListWidgetState extends State<TootsListWidget> {
           result = await getIt<TootsApiService>().getPublicTimeline();
           break;
         case TimelineType.account:
-          result = await getIt<TootsApiService>().getAccountStatuses(widget.accountId!);
+          result = await getIt<TootsApiService>().getAccountStatuses(
+            widget.accountId!,
+          );
           break;
       }
       if (!mounted) return;
@@ -69,12 +72,6 @@ class _TootsListWidgetState extends State<TootsListWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (_loading && _statuses == null) {
-      return const Center(
-        child: CircularProgressIndicator(color: AppColors.primary),
-      );
-    }
-
     if (_error != null && _statuses == null) {
       return Center(
         child: Padding(
@@ -110,11 +107,14 @@ class _TootsListWidgetState extends State<TootsListWidget> {
     return RefreshIndicator(
       onRefresh: _load,
       color: AppColors.primary,
-      child: ListView.builder(
-        padding: const EdgeInsets.only(top: 8, bottom: 80),
-        itemCount: statuses.length,
-        itemBuilder: (context, index) =>
-            TootCardWidget(status: statuses[index]),
+      child: Skeletonizer(
+        enabled: _loading,
+        child: ListView.builder(
+          padding: const EdgeInsets.only(top: 8, bottom: 80),
+          itemCount: statuses.length,
+          itemBuilder: (context, index) =>
+              TootCardWidget(status: statuses[index]),
+        ),
       ),
     );
   }

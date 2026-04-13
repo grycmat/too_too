@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'package:too_too/core/di/service_locator.dart';
 import 'package:too_too/core/theme/colors.dart';
 import 'package:too_too/features/dashboard/models/notification.dart' as model;
@@ -46,12 +47,6 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (_loading && _notifications == null) {
-      return const Center(
-        child: CircularProgressIndicator(color: AppColors.primary),
-      );
-    }
-
     if (_error != null && _notifications == null) {
       return Center(
         child: Padding(
@@ -96,11 +91,14 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     return RefreshIndicator(
       onRefresh: _load,
       color: AppColors.primary,
-      child: ListView.builder(
-        padding: const EdgeInsets.only(top: 8, bottom: 80),
-        itemCount: notifications.length,
-        itemBuilder: (context, index) =>
-            NotificationCardWidget(notification: notifications[index]),
+      child: Skeletonizer(
+        enabled: _loading,
+        child: ListView.builder(
+          padding: const EdgeInsets.only(top: 8, bottom: 80),
+          itemCount: notifications.length,
+          itemBuilder: (context, index) =>
+              NotificationCardWidget(notification: notifications[index]),
+        ),
       ),
     );
   }

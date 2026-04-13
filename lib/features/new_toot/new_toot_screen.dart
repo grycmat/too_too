@@ -86,6 +86,7 @@ class _NewTootScreenState extends State<NewTootScreen> {
       final List<String> mediaIds = [];
       for (final image in _selectedImages) {
         final id = await tootsApi.uploadMedia(image);
+        print(id);
         mediaIds.add(id);
       }
 
@@ -109,8 +110,10 @@ class _NewTootScreenState extends State<NewTootScreen> {
       final errorMessage =
           e.response?.data?['error'] as String? ?? 'Failed to post toot.';
       _showError(errorMessage);
+      print(e.toString());
     } catch (e) {
       _showError('An unexpected error occurred.');
+      print(e.toString());
     } finally {
       if (mounted) {
         setState(() => _isPosting = false);
@@ -153,10 +156,12 @@ class _NewTootScreenState extends State<NewTootScreen> {
             children: [
               // Instance Badge
               Align(
-                alignment: Alignment.centerRight,
+                alignment: Alignment.topLeft,
                 child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 8,
+                  ),
                   decoration: BoxDecoration(
                     color: colorScheme.secondary.withValues(alpha: 0.15),
                     borderRadius: BorderRadius.circular(20),
@@ -200,8 +205,8 @@ class _NewTootScreenState extends State<NewTootScreen> {
                         children: [
                           TextField(
                             controller: _textController,
-                            maxLines: 5,
-                            minLines: 3,
+                            maxLines: 7,
+                            minLines: 7,
                             maxLength: _maxLength,
                             enabled: !_isPosting,
                             style: theme.textTheme.bodyMedium,
