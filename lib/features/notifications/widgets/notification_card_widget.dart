@@ -3,6 +3,8 @@ import 'package:too_too/core/theme/colors.dart';
 import 'package:too_too/features/dashboard/models/notification.dart' as model;
 import 'package:too_too/features/dashboard/utils/status_formatting.dart';
 import 'package:too_too/features/dashboard/widgets/toot_content_widget.dart';
+import 'package:too_too/features/profile/profile_screen.dart';
+import 'package:too_too/features/status_details/status_details_screen.dart';
 
 class NotificationCardWidget extends StatelessWidget {
   final model.Notification notification;
@@ -96,7 +98,18 @@ class NotificationCardWidget extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 8),
-          TootContentWidget(content: htmlToPlainText(status.content)),
+          InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      StatusDetailsScreen(statusId: notification.status!.id),
+                ),
+              );
+            },
+            child: TootContentWidget(content: htmlToPlainText(status.content)),
+          ),
           const SizedBox(height: 12),
           Row(
             children: [
@@ -147,21 +160,32 @@ class NotificationCardWidget extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           if (status != null)
-            Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: AppColors.background,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Text(
-                '"${htmlToPlainText(status.content)}"',
-                style: const TextStyle(
-                  color: AppColors.textSecondary,
-                  fontStyle: FontStyle.italic,
-                  height: 1.4,
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        StatusDetailsScreen(statusId: notification.status!.id),
+                  ),
+                );
+              },
+              child: Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: AppColors.background,
+                  borderRadius: BorderRadius.circular(8),
                 ),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
+                child: Text(
+                  '"${htmlToPlainText(status.content)}"',
+                  style: const TextStyle(
+                    color: AppColors.textSecondary,
+                    fontStyle: FontStyle.italic,
+                    height: 1.4,
+                  ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
             ),
         ],
@@ -199,33 +223,34 @@ class NotificationCardWidget extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 8),
-          Text(
-            'INSTANCE: ${(notification.account.url.isNotEmpty) ? notification.account.url.split('//').last.split('/').first.toUpperCase() : 'UNKNOWN'}',
-            style: const TextStyle(
-              color: AppColors.primary,
-              fontSize: 10,
-              letterSpacing: 0.5,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
           const SizedBox(height: 12),
           if (status != null)
-            Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: AppColors.background,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Text(
-                '"${htmlToPlainText(status.content)}"',
-                style: const TextStyle(
-                  color: AppColors.textSecondary,
-                  fontStyle: FontStyle.italic,
-                  height: 1.4,
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        StatusDetailsScreen(statusId: notification.status!.id),
+                  ),
+                );
+              },
+              child: Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: AppColors.background,
+                  borderRadius: BorderRadius.circular(8),
                 ),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
+                child: Text(
+                  '"${htmlToPlainText(status.content)}"',
+                  style: const TextStyle(
+                    color: AppColors.textSecondary,
+                    fontStyle: FontStyle.italic,
+                    height: 1.4,
+                  ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
             ),
         ],
@@ -241,32 +266,43 @@ class NotificationCardWidget extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  notification.account.displayName.isNotEmpty
-                      ? notification.account.displayName
-                      : notification.account.username,
-                  style: const TextStyle(
-                    color: AppColors.textPrimary,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 15,
-                  ),
+          InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      ProfileScreen(accountId: notification.account.id),
                 ),
-                const SizedBox(height: 4),
-                const Text(
-                  'FOLLOWED YOU',
-                  style: TextStyle(
-                    color: AppColors.secondaryVariant,
-                    fontSize: 11,
-                    fontWeight: FontWeight.w700,
-                    letterSpacing: 1.2,
+              );
+            },
+            child: Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    notification.account.displayName.isNotEmpty
+                        ? notification.account.displayName
+                        : notification.account.username,
+                    style: const TextStyle(
+                      color: AppColors.textPrimary,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 15,
+                    ),
                   ),
-                ),
-              ],
+                  const SizedBox(height: 4),
+                  const Text(
+                    'FOLLOWED YOU',
+                    style: TextStyle(
+                      color: AppColors.secondaryVariant,
+                      fontSize: 11,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: 1.2,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
           SizedBox(
