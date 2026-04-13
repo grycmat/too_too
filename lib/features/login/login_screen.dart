@@ -73,6 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 16),
 
                 GlowWrapper(
+                  borderRadius: 50,
                   child: Icon(
                     Icons.hub_rounded,
                     size: 100,
