@@ -56,46 +56,48 @@ class _StatusDetailsScreenState extends State<StatusDetailsScreen> {
         final status = statusSnapshot.data;
         if (status == null) return const SizedBox();
 
-        return CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 16,
+        return Scaffold(
+          body: CustomScrollView(
+            slivers: [
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 16,
+                  ),
+                  child: StatusHeroWidget(status: status),
                 ),
-                child: StatusHeroWidget(status: status),
               ),
-            ),
-            SliverToBoxAdapter(
-              child: FutureBuilder<StatusContext>(
-                future: _contextFuture,
-                builder: (context, contextSnapshot) {
-                  if (contextSnapshot.connectionState ==
-                      ConnectionState.waiting) {
-                    return const Padding(
-                      padding: EdgeInsets.all(32),
-                      child: Center(
-                        child: CircularProgressIndicator(
-                          color: AppColors.primary,
+              SliverToBoxAdapter(
+                child: FutureBuilder<StatusContext>(
+                  future: _contextFuture,
+                  builder: (context, contextSnapshot) {
+                    if (contextSnapshot.connectionState ==
+                        ConnectionState.waiting) {
+                      return const Padding(
+                        padding: EdgeInsets.all(32),
+                        child: Center(
+                          child: CircularProgressIndicator(
+                            color: AppColors.primary,
+                          ),
                         ),
-                      ),
-                    );
-                  }
-                  if (contextSnapshot.hasError || !contextSnapshot.hasData) {
-                    return const SizedBox();
-                  }
+                      );
+                    }
+                    if (contextSnapshot.hasError || !contextSnapshot.hasData) {
+                      return const SizedBox();
+                    }
 
-                  final contextData = contextSnapshot.data!;
-                  final replies = contextData.descendants;
+                    final contextData = contextSnapshot.data!;
+                    final replies = contextData.descendants;
 
-                  if (replies.isEmpty) return const SizedBox();
+                    if (replies.isEmpty) return const SizedBox();
 
-                  return TransmissionLogsWidget(replies: replies);
-                },
+                    return TransmissionLogsWidget(replies: replies);
+                  },
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         );
       },
     );
