@@ -109,11 +109,13 @@ class _TootsListWidgetState extends State<TootsListWidget> {
       color: AppColors.primary,
       child: Skeletonizer(
         enabled: _loading,
-        child: ListView.builder(
+        child: ListView(
           padding: const EdgeInsets.only(top: 8, bottom: 80),
-          itemCount: statuses.length,
-          itemBuilder: (context, index) =>
-              TootCardWidget(status: statuses[index]),
+          children: [
+            SizedBox(height: 100),
+            ...statuses.map((status) => TootCardWidget(status: status)).toList(),
+            SizedBox(height: 100),
+          ],
         ),
       ),
     );

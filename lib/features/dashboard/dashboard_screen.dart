@@ -19,11 +19,10 @@ class DashboardScreen extends StatelessWidget {
         children: [
           Column(
             children: [
-              const AppTopBarWidget(),
-
               Expanded(child: navigationShell),
             ],
           ),
+          const AppTopBarWidget(),
           Positioned(
             bottom: 0,
             left: 0,
