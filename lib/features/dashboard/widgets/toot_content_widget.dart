@@ -5,8 +5,14 @@ import 'package:too_too/core/theme/colors.dart';
 class TootContentWidget extends StatelessWidget {
   final String content;
   final String? imageUrl;
+  final VoidCallback? onImageTap;
 
-  const TootContentWidget({super.key, required this.content, this.imageUrl});
+  const TootContentWidget({
+    super.key,
+    required this.content,
+    this.imageUrl,
+    this.onImageTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,21 +23,27 @@ class TootContentWidget extends StatelessWidget {
 
         if (imageUrl != null) ...[
           const SizedBox(height: 12),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: CachedNetworkImage(
-              fit: BoxFit.cover,
-              height: 180,
-              width: double.infinity,
-              imageUrl: imageUrl!,
-              placeholder: (_, _) => Container(
-                height: 180,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: AppColors.surface,
-                  borderRadius: BorderRadius.circular(12),
+          GestureDetector(
+            onTap: onImageTap,
+            child: Hero(
+              tag: imageUrl!,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: CachedNetworkImage(
+                  fit: BoxFit.cover,
+                  height: 180,
+                  width: double.infinity,
+                  imageUrl: imageUrl!,
+                  placeholder: (_, _) => Container(
+                    height: 180,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: AppColors.surface,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: const CircularProgressIndicator(color: AppColors.primary),
+                  ),
                 ),
-                child: CircularProgressIndicator(color: AppColors.primary),
               ),
             ),
           ),

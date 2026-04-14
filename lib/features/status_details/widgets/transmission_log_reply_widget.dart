@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:too_too/core/theme/colors.dart';
 import 'package:too_too/features/dashboard/models/status.dart';
 import 'package:too_too/features/dashboard/utils/status_formatting.dart';
+import 'package:too_too/features/status_details/media_details_screen.dart';
 import 'package:too_too/features/dashboard/widgets/toot_content_widget.dart';
 
 class TransmissionLogReplyWidget extends StatelessWidget {
@@ -128,6 +129,17 @@ class TransmissionLogReplyWidget extends StatelessWidget {
                     TootContentWidget(
                       content: htmlToPlainText(reply.content),
                       imageUrl: firstImageUrl(reply.mediaAttachments),
+                      onImageTap: () {
+                        final imageUrl = firstImageUrl(reply.mediaAttachments);
+                        if (imageUrl != null) {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  MediaDetailsScreen(imageUrl: imageUrl),
+                            ),
+                          );
+                        }
+                      },
                     ),
                     const SizedBox(height: 12),
                     Row(

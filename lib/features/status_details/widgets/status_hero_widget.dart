@@ -6,6 +6,7 @@ import 'package:too_too/features/dashboard/utils/status_formatting.dart';
 import 'package:too_too/features/dashboard/widgets/author_widget.dart';
 import 'package:too_too/features/dashboard/widgets/toot_actions_widget.dart';
 import 'package:too_too/features/dashboard/widgets/toot_content_widget.dart';
+import 'package:too_too/features/status_details/media_details_screen.dart';
 import 'package:too_too/shared/service/toots_api_service.dart';
 
 class StatusHeroWidget extends StatefulWidget {
@@ -153,6 +154,16 @@ class _StatusHeroWidgetState extends State<StatusHeroWidget> {
           TootContentWidget(
             content: htmlToPlainText(s.content),
             imageUrl: firstImageUrl(s.mediaAttachments),
+            onImageTap: () {
+              final imageUrl = firstImageUrl(s.mediaAttachments);
+              if (imageUrl != null) {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => MediaDetailsScreen(imageUrl: imageUrl),
+                  ),
+                );
+              }
+            },
           ),
           const SizedBox(height: 16),
           Text(

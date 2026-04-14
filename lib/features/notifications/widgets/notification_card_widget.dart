@@ -4,6 +4,7 @@ import 'package:too_too/features/dashboard/models/notification.dart' as model;
 import 'package:too_too/features/dashboard/utils/status_formatting.dart';
 import 'package:too_too/features/dashboard/widgets/toot_content_widget.dart';
 import 'package:too_too/features/profile/profile_screen.dart';
+import 'package:too_too/features/status_details/media_details_screen.dart';
 import 'package:too_too/features/status_details/status_details_screen.dart';
 
 class NotificationCardWidget extends StatelessWidget {
@@ -108,7 +109,21 @@ class NotificationCardWidget extends StatelessWidget {
                 ),
               );
             },
-            child: TootContentWidget(content: htmlToPlainText(status.content)),
+            child: TootContentWidget(
+              content: htmlToPlainText(status.content),
+              imageUrl: firstImageUrl(status.mediaAttachments),
+              onImageTap: () {
+                final imageUrl = firstImageUrl(status.mediaAttachments);
+                if (imageUrl != null) {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          MediaDetailsScreen(imageUrl: imageUrl),
+                    ),
+                  );
+                }
+              },
+            ),
           ),
           const SizedBox(height: 12),
           Row(
