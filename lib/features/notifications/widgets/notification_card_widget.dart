@@ -57,6 +57,7 @@ class NotificationCardWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _NotificationAvatar(
+            accountId: notification.account.id,
             avatarUrl: notification.account.avatar,
             isPrimary: isPrimary,
             badgeIcon: badgeIcon,
@@ -281,17 +282,17 @@ class NotificationCardWidget extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          InkWell(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      ProfileScreen(accountId: notification.account.id),
-                ),
-              );
-            },
-            child: Expanded(
+          Expanded(
+            child: InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        ProfileScreen(accountId: notification.account.id),
+                  ),
+                );
+              },
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -352,11 +353,13 @@ class NotificationCardWidget extends StatelessWidget {
 }
 
 class _NotificationAvatar extends StatelessWidget {
+  final String accountId;
   final String avatarUrl;
   final bool isPrimary;
   final IconData badgeIcon;
 
   const _NotificationAvatar({
+    required this.accountId,
     required this.avatarUrl,
     required this.isPrimary,
     required this.badgeIcon,
@@ -370,40 +373,52 @@ class _NotificationAvatar extends StatelessWidget {
     return SizedBox(
       width: 58,
       height: 58,
-      child: Stack(
-        children: [
-          Container(
-            width: 48,
-            height: 48,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(14),
-              border: Border.all(color: color, width: 1.5),
-              boxShadow: [
-                BoxShadow(color: glow, blurRadius: 10, spreadRadius: 1),
-              ],
-              image: avatarUrl.isNotEmpty
-                  ? DecorationImage(
-                      image: NetworkImage(avatarUrl),
-                      fit: BoxFit.cover,
-                    )
+      child: InkWell(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ProfileScreen(accountId: accountId),
+            ),
+          );
+        },
+        child: Stack(
+          children: [
+            Container(
+              width: 48,
+              height: 48,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(14),
+                border: Border.all(color: color, width: 1.5),
+                boxShadow: [
+                  BoxShadow(color: glow, blurRadius: 10, spreadRadius: 1),
+                ],
+                image: avatarUrl.isNotEmpty
+                    ? DecorationImage(
+                        image: NetworkImage(avatarUrl),
+                        fit: BoxFit.cover,
+                      )
+                    : null,
+              ),
+              child: avatarUrl.isEmpty
+                  ? Icon(Icons.person, color: color)
                   : null,
             ),
-            child: avatarUrl.isEmpty ? Icon(Icons.person, color: color) : null,
-          ),
-          Positioned(
-            right: 0,
-            bottom: 0,
-            child: Container(
-              padding: const EdgeInsets.all(4),
-              decoration: BoxDecoration(
-                color: AppColors.card,
-                shape: BoxShape.circle,
-                border: Border.all(color: color, width: 1.2),
+            Positioned(
+              right: 0,
+              bottom: 0,
+              child: Container(
+                padding: const EdgeInsets.all(4),
+                decoration: BoxDecoration(
+                  color: AppColors.card,
+                  shape: BoxShape.circle,
+                  border: Border.all(color: color, width: 1.2),
+                ),
+                child: Icon(badgeIcon, size: 14, color: color),
               ),
-              child: Icon(badgeIcon, size: 14, color: color),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

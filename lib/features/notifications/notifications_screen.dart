@@ -93,11 +93,16 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
       color: AppColors.primary,
       child: Skeletonizer(
         enabled: _loading,
-        child: ListView.builder(
+        child: ListView(
           padding: const EdgeInsets.only(top: 8, bottom: 80),
-          itemCount: notifications.length,
-          itemBuilder: (context, index) =>
-              NotificationCardWidget(notification: notifications[index]),
+          children: [
+            SizedBox(height: 100),
+            ...notifications.map(
+              (notification) =>
+                  NotificationCardWidget(notification: notification),
+            ),
+            SizedBox(height: 100),
+          ],
         ),
       ),
     );
