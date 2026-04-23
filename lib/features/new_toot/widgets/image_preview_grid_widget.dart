@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:too_too/core/theme/colors.dart';
-import 'package:too_too/core/widgets/neon_card_widget.dart';
+import 'package:neon/core/theme/colors.dart';
+import 'package:neon/core/widgets/neon_card_widget.dart';
 
 class ImagePreviewGridWidget extends StatelessWidget {
   final List<File> images;

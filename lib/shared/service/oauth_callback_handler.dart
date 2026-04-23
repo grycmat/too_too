@@ -11,7 +11,7 @@ class OAuthCallbackHandler {
 
   void startListening() {
     _linkSubscription = _appLinks.uriLinkStream.listen((uri) {
-      if (uri.scheme == 'tootoo' && uri.host == 'oauth-callback') {
+      if (uri.scheme == 'neon' && uri.host == 'oauth-callback') {
         final code = uri.queryParameters['code'];
         if (code != null && code.isNotEmpty) {
           _codeController.add(code);

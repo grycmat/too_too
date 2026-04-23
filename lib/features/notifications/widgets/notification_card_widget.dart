@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:too_too/core/theme/colors.dart';
-import 'package:too_too/features/dashboard/models/notification.dart' as model;
-import 'package:too_too/features/dashboard/utils/status_formatting.dart';
-import 'package:too_too/features/dashboard/widgets/toot_content_widget.dart';
-import 'package:too_too/features/profile/profile_screen.dart';
-import 'package:too_too/features/status_details/media_details_screen.dart';
-import 'package:too_too/features/status_details/status_details_screen.dart';
+import 'package:neon/core/theme/colors.dart';
+import 'package:neon/features/dashboard/models/notification.dart' as model;
+import 'package:neon/features/dashboard/utils/status_formatting.dart';
+import 'package:neon/features/dashboard/widgets/toot_content_widget.dart';
+import 'package:neon/features/profile/profile_screen.dart';
+import 'package:neon/features/status_details/media_details_screen.dart';
+import 'package:neon/features/status_details/status_details_screen.dart';
 
 class NotificationCardWidget extends StatelessWidget {
   final model.Notification notification;

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:too_too/core/di/service_locator.dart';
-import 'package:too_too/core/theme/colors.dart';
-import 'package:too_too/features/settings/models/user_settings.dart';
-import 'package:too_too/shared/service/user_service.dart';
-import 'package:too_too/shared/service/user_settings_service.dart';
+import 'package:neon/core/di/service_locator.dart';
+import 'package:neon/core/theme/colors.dart';
+import 'package:neon/features/settings/models/user_settings.dart';
+import 'package:neon/shared/service/user_service.dart';
+import 'package:neon/shared/service/user_settings_service.dart';
 
 import 'widgets/settings_brightness_slider.dart';
 import 'widgets/settings_danger_button.dart';

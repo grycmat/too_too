@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:too_too/core/widgets/glow_wrapper.dart';
+import 'package:neon/core/widgets/glow_wrapper.dart';
 
 class AppTextField extends StatelessWidget {
   final String label;

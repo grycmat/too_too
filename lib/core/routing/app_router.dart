@@ -1,14 +1,14 @@
 import 'package:go_router/go_router.dart';
-import 'package:too_too/core/di/service_locator.dart';
-import 'package:too_too/features/dashboard/dashboard_screen.dart';
-import 'package:too_too/features/dashboard/widgets/toots_list_widget.dart';
-import 'package:too_too/features/explore/explore_screen.dart';
-import 'package:too_too/features/login/login_screen.dart';
-import 'package:too_too/features/notifications/notifications_screen.dart';
-import 'package:too_too/features/profile/profile_screen.dart';
-import 'package:too_too/features/settings/settings_screen.dart';
-import 'package:too_too/features/status_details/status_details_screen.dart';
-import 'package:too_too/shared/service/auth_service.dart';
+import 'package:neon/core/di/service_locator.dart';
+import 'package:neon/features/dashboard/dashboard_screen.dart';
+import 'package:neon/features/dashboard/widgets/toots_list_widget.dart';
+import 'package:neon/features/explore/explore_screen.dart';
+import 'package:neon/features/login/login_screen.dart';
+import 'package:neon/features/notifications/notifications_screen.dart';
+import 'package:neon/features/profile/profile_screen.dart';
+import 'package:neon/features/settings/settings_screen.dart';
+import 'package:neon/features/status_details/status_details_screen.dart';
+import 'package:neon/shared/service/auth_service.dart';
 
 final GoRouter appRouter = GoRouter(
   initialLocation: '/login',

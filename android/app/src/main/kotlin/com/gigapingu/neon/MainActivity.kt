@@ -1,4 +1,4 @@
-package com.gigapingu.too_too
+package com.gigapingu.neon
 
 import io.flutter.embedding.android.FlutterActivity
 

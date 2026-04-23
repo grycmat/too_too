@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:too_too/core/theme/colors.dart';
-import 'package:too_too/features/dashboard/models/status.dart';
-import 'package:too_too/features/dashboard/widgets/toots_list_widget.dart';
+import 'package:neon/core/theme/colors.dart';
+import 'package:neon/features/dashboard/models/status.dart';
+import 'package:neon/features/dashboard/widgets/toots_list_widget.dart';
 import 'profile_header_widget.dart';
 
 class AccountWidget extends StatelessWidget {

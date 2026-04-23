@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:too_too/core/di/service_locator.dart';
-import 'package:too_too/core/theme/colors.dart';
-import 'package:too_too/features/dashboard/models/status.dart';
-import 'package:too_too/features/dashboard/utils/status_formatting.dart';
-import 'package:too_too/features/dashboard/widgets/author_widget.dart';
-import 'package:too_too/features/dashboard/widgets/toot_actions_widget.dart';
-import 'package:too_too/features/dashboard/widgets/toot_content_widget.dart';
-import 'package:too_too/features/status_details/media_details_screen.dart';
-import 'package:too_too/shared/service/toots_api_service.dart';
+import 'package:neon/core/di/service_locator.dart';
+import 'package:neon/core/theme/colors.dart';
+import 'package:neon/features/dashboard/models/status.dart';
+import 'package:neon/features/dashboard/utils/status_formatting.dart';
+import 'package:neon/features/dashboard/widgets/author_widget.dart';
+import 'package:neon/features/dashboard/widgets/toot_actions_widget.dart';
+import 'package:neon/features/dashboard/widgets/toot_content_widget.dart';
+import 'package:neon/features/status_details/media_details_screen.dart';
+import 'package:neon/shared/service/toots_api_service.dart';
 
 class StatusHeroWidget extends StatefulWidget {
   final Status status;

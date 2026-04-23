@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:too_too/features/dashboard/models/status.dart';
-import 'package:too_too/features/dashboard/models/status_context.dart';
-import 'package:too_too/features/dashboard/models/notification.dart';
+import 'package:neon/features/dashboard/models/status.dart';
+import 'package:neon/features/dashboard/models/status_context.dart';
+import 'package:neon/features/dashboard/models/notification.dart';
 import 'app_http_service.dart';
 
 class TootsApiService {

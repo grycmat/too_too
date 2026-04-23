@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-import 'package:too_too/core/di/service_locator.dart';
-import 'package:too_too/core/theme/colors.dart';
-import 'package:too_too/features/dashboard/models/status.dart';
-import 'package:too_too/shared/service/toots_api_service.dart';
+import 'package:neon/core/di/service_locator.dart';
+import 'package:neon/core/theme/colors.dart';
+import 'package:neon/features/dashboard/models/status.dart';
+import 'package:neon/shared/service/toots_api_service.dart';
 import 'toot_card_widget.dart';
 
 enum TimelineType { home, public, account }

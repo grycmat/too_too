@@ -5,9 +5,9 @@ import 'app_http_service.dart';
 import 'oauth_callback_handler.dart';
 
 class AuthService {
-  static const _redirectUri = 'tootoo://oauth-callback';
+  static const _redirectUri = 'neon://oauth-callback';
   static const _scopes = 'read write push';
-  static const _clientName = 'TooToo';
+  static const _clientName = 'Neon';
 
   static const _keyAccessToken = 'access_token';
   static const _keyClientId = 'client_id';

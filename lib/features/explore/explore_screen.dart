@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:too_too/features/dashboard/widgets/toots_list_widget.dart';
+import 'package:neon/features/dashboard/widgets/toots_list_widget.dart';
 
 class ExploreScreen extends StatelessWidget {
   const ExploreScreen({super.key});

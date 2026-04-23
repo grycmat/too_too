@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widget_previews.dart';
-import 'package:too_too/core/theme/colors.dart';
+import 'package:neon/core/theme/colors.dart';
 
 class AppBottomNavWidget extends StatelessWidget {
   final int currentIndex;

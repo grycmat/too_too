@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:too_too/core/theme/colors.dart';
-import 'package:too_too/features/dashboard/models/status.dart';
-import 'package:too_too/features/status_details/widgets/transmission_log_reply_widget.dart';
+import 'package:neon/core/theme/colors.dart';
+import 'package:neon/features/dashboard/models/status.dart';
+import 'package:neon/features/status_details/widgets/transmission_log_reply_widget.dart';
 
 class TransmissionLogsWidget extends StatelessWidget {
   final List<Status> replies;

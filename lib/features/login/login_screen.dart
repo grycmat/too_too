@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widget_previews.dart';
 import 'package:go_router/go_router.dart';
-import 'package:too_too/core/di/service_locator.dart';
-import 'package:too_too/core/widgets/app_text_field.dart';
-import 'package:too_too/core/widgets/glow_wrapper.dart';
-import 'package:too_too/shared/service/auth_service.dart';
-import 'package:too_too/shared/widgets/app_button.widget.dart';
-import 'package:too_too/shared/widgets/link_button.widget.dart';
+import 'package:neon/core/di/service_locator.dart';
+import 'package:neon/core/widgets/app_text_field.dart';
+import 'package:neon/core/widgets/glow_wrapper.dart';
+import 'package:neon/shared/service/auth_service.dart';
+import 'package:neon/shared/widgets/app_button.widget.dart';
+import 'package:neon/shared/widgets/link_button.widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class LoginScreen extends StatefulWidget {

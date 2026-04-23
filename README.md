@@ -1,6 +1,6 @@
-# Too Too
+# Neon
 
-Updated version of the TooToo app.
+Flutter Mastodon client with a neon-glow dark theme.
 ## Screenshots
 
 The UI features a neon-glow dark theme with cyan accents, glowing card borders, and a feed-style dashboard.

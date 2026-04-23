@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:too_too/core/theme/colors.dart';
-import 'package:too_too/features/profile/profile_screen.dart';
+import 'package:neon/core/theme/colors.dart';
+import 'package:neon/features/profile/profile_screen.dart';
 
 class AuthorWidget extends StatelessWidget {
   final String accountId;

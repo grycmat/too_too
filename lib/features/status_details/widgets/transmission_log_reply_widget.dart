@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:too_too/core/theme/colors.dart';
-import 'package:too_too/features/dashboard/models/status.dart';
-import 'package:too_too/features/dashboard/utils/status_formatting.dart';
-import 'package:too_too/features/status_details/media_details_screen.dart';
-import 'package:too_too/features/dashboard/widgets/toot_content_widget.dart';
+import 'package:neon/core/theme/colors.dart';
+import 'package:neon/features/dashboard/models/status.dart';
+import 'package:neon/features/dashboard/utils/status_formatting.dart';
+import 'package:neon/features/status_details/media_details_screen.dart';
+import 'package:neon/features/dashboard/widgets/toot_content_widget.dart';
 
 class TransmissionLogReplyWidget extends StatelessWidget {
   final Status reply;

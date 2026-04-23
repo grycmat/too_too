@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:too_too/core/theme/colors.dart';
-import 'package:too_too/core/widgets/avatar_widget.dart';
-import 'package:too_too/core/widgets/neon_card_widget.dart';
+import 'package:neon/core/theme/colors.dart';
+import 'package:neon/core/widgets/avatar_widget.dart';
+import 'package:neon/core/widgets/neon_card_widget.dart';
 
 class SettingsProfileHeader extends StatelessWidget {
   final String displayName;

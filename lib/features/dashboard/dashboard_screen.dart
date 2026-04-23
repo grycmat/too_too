@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:too_too/core/theme/colors.dart';
-import 'package:too_too/core/widgets/glow_wrapper.dart';
-import 'package:too_too/features/new_toot/new_toot_screen.dart';
+import 'package:neon/core/theme/colors.dart';
+import 'package:neon/core/widgets/glow_wrapper.dart';
+import 'package:neon/features/new_toot/new_toot_screen.dart';
 import 'widgets/app_top_bar_widget.dart';
 import 'widgets/app_bottom_nav_widget.dart';
 

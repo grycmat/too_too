@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:too_too/features/settings/models/user_settings.dart';
+import 'package:neon/features/settings/models/user_settings.dart';
 
 class UserSettingsService {
   static const String _storageKey = 'user_settings';

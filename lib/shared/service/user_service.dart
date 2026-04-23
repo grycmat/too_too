@@ -1,7 +1,7 @@
 import 'dart:developer';
-import 'package:too_too/features/profile/models/profile.dart';
-import 'package:too_too/features/dashboard/models/status.dart';
-import 'package:too_too/shared/service/app_http_service.dart';
+import 'package:neon/features/profile/models/profile.dart';
+import 'package:neon/features/dashboard/models/status.dart';
+import 'package:neon/shared/service/app_http_service.dart';
 
 class UserService {
   final AppHttpService _http;

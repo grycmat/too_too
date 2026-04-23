@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:too_too/core/widgets/neon_card_widget.dart';
+import 'package:neon/core/widgets/neon_card_widget.dart';
 
 class MediaActionCardWidget extends StatelessWidget {
   final IconData icon;

@@ -1,4 +1,4 @@
-import 'package:too_too/features/dashboard/models/status.dart';
+import 'package:neon/features/dashboard/models/status.dart';
 
 String htmlToPlainText(String html) {
   var text = html

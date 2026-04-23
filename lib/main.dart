@@ -13,16 +13,16 @@ void main() async {
   if (isLogged) {
     await getIt<UserService>().getCurrentUserProfile();
   }
-  runApp(const TooTooApp());
+  runApp(const NeonApp());
 }
 
-class TooTooApp extends StatelessWidget {
-  const TooTooApp({super.key});
+class NeonApp extends StatelessWidget {
+  const NeonApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'Too Too',
+      title: 'Neon',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.darkTheme,
       routerConfig: appRouter,

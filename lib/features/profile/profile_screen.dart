@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:too_too/core/di/service_locator.dart';
-import 'package:too_too/core/theme/colors.dart';
-import 'package:too_too/features/dashboard/models/status.dart';
-import 'package:too_too/shared/service/user_service.dart';
+import 'package:neon/core/di/service_locator.dart';
+import 'package:neon/core/theme/colors.dart';
+import 'package:neon/features/dashboard/models/status.dart';
+import 'package:neon/shared/service/user_service.dart';
 
 import 'widgets/account_widget.dart';
 

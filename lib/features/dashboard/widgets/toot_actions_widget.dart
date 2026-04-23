@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:too_too/core/theme/colors.dart';
+import 'package:neon/core/theme/colors.dart';
 
 class TootActionsWidget extends StatelessWidget {
   final int replies;
