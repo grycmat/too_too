@@ -6,12 +6,12 @@ import 'package:flutter/widget_previews.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:neon/core/di/service_locator.dart';
 import 'package:neon/core/theme/colors.dart';
-import 'package:neon/core/widgets/neon_card_widget.dart';
 import 'package:neon/core/widgets/status_chip_widget.dart';
 import 'package:neon/shared/service/auth_service.dart';
 import 'package:neon/shared/service/toots_api_service.dart';
 import 'package:neon/shared/widgets/app_button.widget.dart';
 
+import 'widgets/compose_area_widget.dart';
 import 'widgets/image_preview_grid_widget.dart';
 import 'widgets/media_action_card_widget.dart';
 
@@ -26,27 +26,40 @@ class NewTootScreen extends StatefulWidget {
 class _NewTootScreenState extends State<NewTootScreen> {
   final ImagePicker _imagePicker = ImagePicker();
   final _textController = TextEditingController();
+  final _spoilerController = TextEditingController();
   static const int _maxLength = 500;
+  static const int _spoilerMaxLength = 200;
   static const int _maxImages = 4;
   int _currentLength = 0;
+  int _spoilerLength = 0;
   final List<File> _selectedImages = [];
   bool _isPosting = false;
+  bool _showSpoiler = false;
+  bool _isSensitive = false;
 
   @override
   void initState() {
     super.initState();
     _textController.addListener(_updateLength);
+    _spoilerController.addListener(_updateSpoilerLength);
   }
 
   @override
   void dispose() {
     _textController.dispose();
+    _spoilerController.dispose();
     super.dispose();
   }
 
   void _updateLength() {
     setState(() {
       _currentLength = _textController.text.length;
+    });
+  }
+
+  void _updateSpoilerLength() {
+    setState(() {
+      _spoilerLength = _spoilerController.text.length;
     });
   }
 
@@ -139,8 +152,6 @@ class _NewTootScreenState extends State<NewTootScreen> {
     final authService = getIt<AuthService>();
     final instanceName = authService.instanceUrl ?? 'MASTODON';
 
-    final textRatio = _currentLength / _maxLength;
-
     return Stack(
       children: [
         SingleChildScrollView(
@@ -194,70 +205,36 @@ class _NewTootScreenState extends State<NewTootScreen> {
 
               const SizedBox(height: 16),
 
-              // Compose Area
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: NeonCardWidget(
-                      padding: const EdgeInsets.all(16),
-                      child: Column(
+              // Spoiler Warning Area
+              AnimatedSize(
+                duration: const Duration(milliseconds: 250),
+                curve: Curves.easeInOut,
+                alignment: Alignment.topCenter,
+                child: _showSpoiler
+                    ? Column(
                         children: [
-                          TextField(
-                            controller: _textController,
-                            maxLines: 7,
-                            minLines: 7,
-                            maxLength: _maxLength,
+                          ComposeAreaWidget(
+                            controller: _spoilerController,
+                            currentLength: _spoilerLength,
+                            maxLength: _spoilerMaxLength,
                             enabled: !_isPosting,
-                            style: theme.textTheme.bodyMedium,
-                            decoration: const InputDecoration(
-                              hintText: 'Broadcast to the void...',
-                              border: InputBorder.none,
-                              enabledBorder: InputBorder.none,
-                              focusedBorder: InputBorder.none,
-                              counterText: '',
-                              contentPadding: EdgeInsets.zero,
-                              filled: false,
-                            ),
+                            hintText: 'Write a spoiler warning...',
+                            statusLabel: 'SPOILER WARNING',
+                            maxLines: 3,
+                            minLines: 3,
                           ),
                           const SizedBox(height: 16),
-                          Row(
-                            children: [
-                              Text(
-                                'STATUS: WRITING',
-                                style: theme.textTheme.labelSmall?.copyWith(
-                                  color: AppColors.primaryVariant,
-                                ),
-                              ),
-                              const SizedBox(width: 16),
-                              Expanded(
-                                child: LinearProgressIndicator(
-                                  value: textRatio,
-                                  borderRadius: BorderRadius.circular(2),
-                                ),
-                              ),
-                              const SizedBox(width: 16),
-                              RichText(
-                                text: TextSpan(
-                                  style: theme.textTheme.labelMedium,
-                                  children: [
-                                    TextSpan(
-                                      text: '$_currentLength',
-                                      style: const TextStyle(
-                                        color: AppColors.primary,
-                                      ),
-                                    ),
-                                    TextSpan(text: '/$_maxLength'),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
                         ],
-                      ),
-                    ),
-                  ),
-                ],
+                      )
+                    : const SizedBox.shrink(),
+              ),
+
+              // Compose Area
+              ComposeAreaWidget(
+                controller: _textController,
+                currentLength: _currentLength,
+                maxLength: _maxLength,
+                enabled: !_isPosting,
               ),
 
               const SizedBox(height: 24),
@@ -294,23 +271,28 @@ class _NewTootScreenState extends State<NewTootScreen> {
               // Bottom Chips
               Row(
                 children: [
-                  StatusChipWidget(
-                    icon: Icons.public,
-                    label: 'PUBLIC',
-                    onTap: () {},
-                  ),
-                  const SizedBox(width: 12),
+                  // StatusChipWidget(
+                  //   icon: Icons.public,
+                  //   label: 'PUBLIC',
+                  //   onTap: () {},
+                  // ),
+                  // const SizedBox(width: 12),
                   StatusChipWidget(
                     icon: Icons.warning_amber_rounded,
-                    iconColor: colorScheme.primary,
-                    label: 'WARNING',
-                    onTap: () {},
+                    isActive: _isSensitive,
+                    label: 'SENSITIVE',
+                    onTap: () {
+                      setState(() => _isSensitive = !_isSensitive);
+                    },
                   ),
                   const SizedBox(width: 12),
                   StatusChipWidget(
-                    icon: Icons.language,
-                    label: 'EN',
-                    onTap: () {},
+                    icon: Icons.visibility_off,
+                    label: 'SPOILER',
+                    isActive: _showSpoiler,
+                    onTap: () {
+                      setState(() => _showSpoiler = !_showSpoiler);
+                    },
                   ),
                 ],
               ),
