@@ -56,7 +56,6 @@ class _StatusHeroWidgetState extends State<StatusHeroWidget> {
         });
       }
     } catch (_) {
-      // silently fail
     } finally {
       _busy = false;
     }
@@ -83,7 +82,6 @@ class _StatusHeroWidgetState extends State<StatusHeroWidget> {
         });
       }
     } catch (_) {
-      // silently fail
     } finally {
       _busy = false;
     }
@@ -126,7 +124,7 @@ class _StatusHeroWidgetState extends State<StatusHeroWidget> {
                   avatarUrl: s.account.avatar.isNotEmpty
                       ? s.account.avatar
                       : null,
-                  timestamp: '', // Hide default timestamp
+                  timestamp: '',
                 ),
               ),
               Container(
@@ -154,12 +152,15 @@ class _StatusHeroWidgetState extends State<StatusHeroWidget> {
           TootContentWidget(
             content: htmlToPlainText(s.content),
             imageUrl: firstImageUrl(s.mediaAttachments),
+            spoilerText: s.spoilerText,
+            sensitive: s.sensitive,
             onImageTap: () {
               final imageUrl = firstImageUrl(s.mediaAttachments);
               if (imageUrl != null) {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => MediaDetailsScreen(imageUrl: imageUrl),
+                    builder: (context) =>
+                        MediaDetailsScreen(imageUrl: imageUrl),
                   ),
                 );
               }
@@ -194,8 +195,6 @@ class _StatusHeroWidgetState extends State<StatusHeroWidget> {
 }
 
 extension StatusApplicationExtension on Status {
-  // Assuming Application object is not fully modeled, we can fallback to generic text or extract it if needed.
-  // We'll keep it simple by returning null for now, or you could extend the Status model to parse 'application'.
   Application? get application => null;
 }
 

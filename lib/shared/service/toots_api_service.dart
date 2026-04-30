@@ -122,8 +122,6 @@ class TootsApiService {
     return StatusContext.fromJson(response.data!);
   }
 
-  /// Uploads a media file via POST /api/v2/media.
-  /// Returns the media attachment ID.
   Future<String> uploadMedia(File file) async {
     final formData = FormData.fromMap({
       'file': await MultipartFile.fromFile(
@@ -144,17 +142,13 @@ class TootsApiService {
     return response.data!['id'] as String;
   }
 
-  /// Posts a new status via POST /api/v1/statuses.
-  /// [status] is the text content.
-  /// [mediaIds] is an optional list of media attachment IDs.
-  /// [visibility] is one of: public, unlisted, private, direct.
-  /// [spoilerText] is an optional content warning.
   Future<Status> postStatus({
     required String status,
     List<String>? mediaIds,
     String visibility = 'public',
     String? spoilerText,
     String? inReplyToId,
+    bool sensitive = false,
   }) async {
     final body = <String, dynamic>{
       'status': status,
@@ -163,6 +157,7 @@ class TootsApiService {
       if (spoilerText != null && spoilerText.isNotEmpty)
         'spoiler_text': spoilerText,
       if (inReplyToId != null) 'in_reply_to_id': inReplyToId,
+      if (sensitive) 'sensitive': true,
     };
 
     final response = await _http.post<Map<String, dynamic>>(
@@ -177,8 +172,6 @@ class TootsApiService {
     return Status.fromJson(response.data!);
   }
 
-  /// Favourite a status via POST /api/v1/statuses/:id/favourite.
-  /// Returns the updated [Status] with `favourited: true`.
   Future<Status> favouriteStatus(String id) async {
     final response = await _http.post<Map<String, dynamic>>(
       '/api/v1/statuses/$id/favourite',
@@ -191,8 +184,6 @@ class TootsApiService {
     return Status.fromJson(response.data!);
   }
 
-  /// Undo favourite via POST /api/v1/statuses/:id/unfavourite.
-  /// Returns the updated [Status] with `favourited: false`.
   Future<Status> unfavouriteStatus(String id) async {
     final response = await _http.post<Map<String, dynamic>>(
       '/api/v1/statuses/$id/unfavourite',
@@ -205,8 +196,6 @@ class TootsApiService {
     return Status.fromJson(response.data!);
   }
 
-  /// Boost (reblog) a status via POST /api/v1/statuses/:id/reblog.
-  /// Returns the reblog [Status] wrapper with `reblogged: true`.
   Future<Status> reblogStatus(String id) async {
     final response = await _http.post<Map<String, dynamic>>(
       '/api/v1/statuses/$id/reblog',
@@ -219,8 +208,6 @@ class TootsApiService {
     return Status.fromJson(response.data!);
   }
 
-  /// Undo boost via POST /api/v1/statuses/:id/unreblog.
-  /// Returns the original [Status] with `reblogged: false`.
   Future<Status> unreblogStatus(String id) async {
     final response = await _http.post<Map<String, dynamic>>(
       '/api/v1/statuses/$id/unreblog',
@@ -233,4 +220,3 @@ class TootsApiService {
     return Status.fromJson(response.data!);
   }
 }
-

@@ -92,10 +92,10 @@ class _VersionChip extends StatelessWidget {
       child: Text(
         label.toUpperCase(),
         style: Theme.of(context).textTheme.labelSmall?.copyWith(
-              color: AppColors.secondary,
-              letterSpacing: 1.5,
-              fontWeight: FontWeight.w700,
-            ),
+          color: AppColors.secondary,
+          letterSpacing: 1.5,
+          fontWeight: FontWeight.w700,
+        ),
       ),
     );
   }

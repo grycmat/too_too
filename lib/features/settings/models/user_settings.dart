@@ -20,12 +20,12 @@ class UserSettings {
   });
 
   const UserSettings.defaults()
-      : accountPrivacy = AccountPrivacy.publicAccount,
-        twoFactorAuthEnabled = true,
-        pushNotificationsEnabled = true,
-        mentionsAndRepliesEnabled = false,
-        themeVariant = AppThemeVariant.neonNoir,
-        brightness = 85;
+    : accountPrivacy = AccountPrivacy.publicAccount,
+      twoFactorAuthEnabled = true,
+      pushNotificationsEnabled = true,
+      mentionsAndRepliesEnabled = false,
+      themeVariant = AppThemeVariant.neonNoir,
+      brightness = 85;
 
   UserSettings copyWith({
     AccountPrivacy? accountPrivacy,
@@ -48,13 +48,13 @@ class UserSettings {
   }
 
   Map<String, dynamic> toJson() => {
-        'accountPrivacy': accountPrivacy.name,
-        'twoFactorAuthEnabled': twoFactorAuthEnabled,
-        'pushNotificationsEnabled': pushNotificationsEnabled,
-        'mentionsAndRepliesEnabled': mentionsAndRepliesEnabled,
-        'themeVariant': themeVariant.name,
-        'brightness': brightness,
-      };
+    'accountPrivacy': accountPrivacy.name,
+    'twoFactorAuthEnabled': twoFactorAuthEnabled,
+    'pushNotificationsEnabled': pushNotificationsEnabled,
+    'mentionsAndRepliesEnabled': mentionsAndRepliesEnabled,
+    'themeVariant': themeVariant.name,
+    'brightness': brightness,
+  };
 
   factory UserSettings.fromJson(Map<String, dynamic> json) {
     return UserSettings(

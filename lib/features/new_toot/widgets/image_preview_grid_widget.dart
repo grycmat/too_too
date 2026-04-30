@@ -66,10 +66,7 @@ class _ImageTile extends StatelessWidget {
   final File image;
   final VoidCallback onRemove;
 
-  const _ImageTile({
-    required this.image,
-    required this.onRemove,
-  });
+  const _ImageTile({required this.image, required this.onRemove});
 
   @override
   Widget build(BuildContext context) {
@@ -80,11 +77,8 @@ class _ImageTile extends StatelessWidget {
       child: Stack(
         fit: StackFit.expand,
         children: [
-          Image.file(
-            image,
-            fit: BoxFit.cover,
-          ),
-          // Gradient overlay for better remove button visibility
+          Image.file(image, fit: BoxFit.cover),
+
           Positioned.fill(
             child: DecoratedBox(
               decoration: BoxDecoration(
@@ -100,7 +94,7 @@ class _ImageTile extends StatelessWidget {
               ),
             ),
           ),
-          // Border overlay
+
           Positioned.fill(
             child: DecoratedBox(
               decoration: BoxDecoration(
@@ -112,7 +106,7 @@ class _ImageTile extends StatelessWidget {
               ),
             ),
           ),
-          // Remove button
+
           Positioned(
             top: 4,
             right: 4,

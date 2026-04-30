@@ -35,8 +35,7 @@ class SettingsDangerButton extends StatelessWidget {
         child: InkWell(
           onTap: onTap,
           child: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
             child: Row(
               children: [
                 Icon(icon, color: AppColors.error, size: 22),
@@ -45,10 +44,10 @@ class SettingsDangerButton extends StatelessWidget {
                   child: Text(
                     label.toUpperCase(),
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: AppColors.error,
-                          letterSpacing: 1.5,
-                          fontWeight: FontWeight.w700,
-                        ),
+                      color: AppColors.error,
+                      letterSpacing: 1.5,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                 ),
               ],

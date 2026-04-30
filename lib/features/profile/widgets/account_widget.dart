@@ -7,10 +7,7 @@ import 'profile_header_widget.dart';
 class AccountWidget extends StatelessWidget {
   final Account account;
 
-  const AccountWidget({
-    super.key,
-    required this.account,
-  });
+  const AccountWidget({super.key, required this.account});
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +16,7 @@ class AccountWidget extends StatelessWidget {
       child: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return [
-            SliverToBoxAdapter(
-              child: ProfileHeaderWidget(account: account),
-            ),
+            SliverToBoxAdapter(child: ProfileHeaderWidget(account: account)),
             SliverPersistentHeader(
               pinned: true,
               delegate: _SliverAppBarDelegate(
@@ -41,9 +36,22 @@ class AccountWidget extends StatelessWidget {
         },
         body: TabBarView(
           children: [
-            TootsListWidget(timelineType: TimelineType.account, accountId: account.id), // Pass user ID to fetch just their toots
-            const Center(child: Text('MEDIA - Coming Soon', style: TextStyle(color: AppColors.textHint))),
-            const Center(child: Text('LIKES - Coming Soon', style: TextStyle(color: AppColors.textHint))),
+            TootsListWidget(
+              timelineType: TimelineType.account,
+              accountId: account.id,
+            ),
+            const Center(
+              child: Text(
+                'MEDIA - Coming Soon',
+                style: TextStyle(color: AppColors.textHint),
+              ),
+            ),
+            const Center(
+              child: Text(
+                'LIKES - Coming Soon',
+                style: TextStyle(color: AppColors.textHint),
+              ),
+            ),
           ],
         ),
       ),
@@ -63,11 +71,11 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return Container(
-      color: AppColors.background,
-      child: _tabBar,
-    );
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) {
+    return Container(color: AppColors.background, child: _tabBar);
   }
 
   @override

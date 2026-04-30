@@ -29,10 +29,7 @@ class NeonCardWidget extends StatelessWidget {
           ),
         ],
       ),
-      child: Padding(
-        padding: padding ?? EdgeInsets.zero,
-        child: child,
-      ),
+      child: Padding(padding: padding ?? EdgeInsets.zero, child: child),
     );
   }
 }

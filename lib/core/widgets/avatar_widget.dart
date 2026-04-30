@@ -60,10 +60,7 @@ class AvatarWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: AppColors.card,
                   shape: BoxShape.circle,
-                  border: Border.all(
-                    color: AppColors.glowBorder,
-                    width: 1.2,
-                  ),
+                  border: Border.all(color: AppColors.glowBorder, width: 1.2),
                 ),
                 child: badge,
               ),

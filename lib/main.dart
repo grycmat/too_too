@@ -5,7 +5,6 @@ import 'core/routing/app_router.dart';
 import 'shared/service/auth_service.dart';
 import 'shared/service/user_service.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setupServiceLocator();

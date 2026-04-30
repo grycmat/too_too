@@ -28,9 +28,9 @@ class SettingsNavTile extends StatelessWidget {
             child: Text(
               title,
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    letterSpacing: 1.2,
-                    fontWeight: FontWeight.w600,
-                  ),
+                letterSpacing: 1.2,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
           trailing ??

@@ -18,9 +18,9 @@ class SettingsStatusChip extends StatelessWidget {
       child: Text(
         label.toUpperCase(),
         style: Theme.of(context).textTheme.labelSmall?.copyWith(
-              color: AppColors.primary,
-              letterSpacing: 1.2,
-            ),
+          color: AppColors.primary,
+          letterSpacing: 1.2,
+        ),
       ),
     );
   }

@@ -32,54 +32,54 @@ class AuthorWidget extends StatelessWidget {
         );
       },
       child: Row(
-      children: [
-        Container(
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(color: AppColors.glowBorder, width: 1.5),
-            boxShadow: [
-              BoxShadow(
-                color: AppColors.primaryGlow,
-                blurRadius: 8,
-                spreadRadius: 1,
-              ),
-            ],
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: AppColors.glowBorder, width: 1.5),
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.primaryGlow,
+                  blurRadius: 8,
+                  spreadRadius: 1,
+                ),
+              ],
+            ),
+            child: CircleAvatar(
+              radius: 22,
+              backgroundColor: AppColors.surface,
+              backgroundImage: avatarUrl != null
+                  ? NetworkImage(avatarUrl!)
+                  : null,
+              child: avatarUrl == null
+                  ? Text(
+                      name.isNotEmpty ? name[0].toUpperCase() : '?',
+                      style: const TextStyle(
+                        color: AppColors.primary,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 18,
+                      ),
+                    )
+                  : null,
+            ),
           ),
-          child: CircleAvatar(
-            radius: 22,
-            backgroundColor: AppColors.surface,
-            backgroundImage: avatarUrl != null
-                ? NetworkImage(avatarUrl!)
-                : null,
-            child: avatarUrl == null
-                ? Text(
-                    name.isNotEmpty ? name[0].toUpperCase() : '?',
-                    style: const TextStyle(
-                      color: AppColors.primary,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 18,
-                    ),
-                  )
-                : null,
+
+          const SizedBox(width: 12),
+
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(name, style: tt.titleMedium),
+                const SizedBox(height: 2),
+                Text(handle, style: tt.titleSmall),
+              ],
+            ),
           ),
-        ),
 
-        const SizedBox(width: 12),
-
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(name, style: tt.titleMedium),
-              const SizedBox(height: 2),
-              Text(handle, style: tt.titleSmall),
-            ],
-          ),
-        ),
-
-        Text(timestamp, style: tt.bodySmall),
-      ],
-    ),
+          Text(timestamp, style: tt.bodySmall),
+        ],
+      ),
     );
   }
 }

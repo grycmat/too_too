@@ -29,14 +29,10 @@ class MediaDetailsScreen extends StatelessWidget {
             child: CachedNetworkImage(
               imageUrl: imageUrl,
               placeholder: (context, url) => const Center(
-                child: CircularProgressIndicator(
-                  color: AppColors.primary,
-                ),
+                child: CircularProgressIndicator(color: AppColors.primary),
               ),
-              errorWidget: (context, url, error) => const Icon(
-                Icons.error,
-                color: AppColors.error,
-              ),
+              errorWidget: (context, url, error) =>
+                  const Icon(Icons.error, color: AppColors.error),
               fit: BoxFit.contain,
               width: double.infinity,
               height: double.infinity,

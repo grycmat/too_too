@@ -95,7 +95,6 @@ class _NewTootScreenState extends State<NewTootScreen> {
     try {
       final tootsApi = getIt<TootsApiService>();
 
-      // Upload media attachments first
       final List<String> mediaIds = [];
       for (final image in _selectedImages) {
         final id = await tootsApi.uploadMedia(image);
@@ -103,10 +102,11 @@ class _NewTootScreenState extends State<NewTootScreen> {
         mediaIds.add(id);
       }
 
-      // Post the status
       await tootsApi.postStatus(
         status: text,
         mediaIds: mediaIds.isNotEmpty ? mediaIds : null,
+        spoilerText: _showSpoiler ? _spoilerController.text.trim() : null,
+        sensitive: _isSensitive,
       );
 
       if (mounted) {
@@ -165,7 +165,6 @@ class _NewTootScreenState extends State<NewTootScreen> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Instance Badge
               Align(
                 alignment: Alignment.topLeft,
                 child: Container(
@@ -205,7 +204,6 @@ class _NewTootScreenState extends State<NewTootScreen> {
 
               const SizedBox(height: 16),
 
-              // Spoiler Warning Area
               AnimatedSize(
                 duration: const Duration(milliseconds: 250),
                 curve: Curves.easeInOut,
@@ -229,7 +227,6 @@ class _NewTootScreenState extends State<NewTootScreen> {
                     : const SizedBox.shrink(),
               ),
 
-              // Compose Area
               ComposeAreaWidget(
                 controller: _textController,
                 currentLength: _currentLength,
@@ -239,7 +236,6 @@ class _NewTootScreenState extends State<NewTootScreen> {
 
               const SizedBox(height: 24),
 
-              // Image Preview Grid
               if (_selectedImages.isNotEmpty) ...[
                 ImagePreviewGridWidget(
                   images: _selectedImages,
@@ -248,7 +244,6 @@ class _NewTootScreenState extends State<NewTootScreen> {
                 const SizedBox(height: 16),
               ],
 
-              // Media Grid
               if (_selectedImages.length < _maxImages && !_isPosting)
                 GridView.count(
                   crossAxisCount: 2,
@@ -268,15 +263,8 @@ class _NewTootScreenState extends State<NewTootScreen> {
 
               const SizedBox(height: 24),
 
-              // Bottom Chips
               Row(
                 children: [
-                  // StatusChipWidget(
-                  //   icon: Icons.public,
-                  //   label: 'PUBLIC',
-                  //   onTap: () {},
-                  // ),
-                  // const SizedBox(width: 12),
                   StatusChipWidget(
                     icon: Icons.warning_amber_rounded,
                     isActive: _isSensitive,
@@ -306,7 +294,6 @@ class _NewTootScreenState extends State<NewTootScreen> {
           ),
         ),
 
-        // Loading overlay
         if (_isPosting)
           Positioned.fill(
             child: Container(

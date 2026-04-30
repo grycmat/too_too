@@ -49,10 +49,8 @@ class SettingsBrightnessSlider extends StatelessWidget {
               thumbColor: AppColors.primary,
               overlayColor: AppColors.primaryGlow,
               trackHeight: 4,
-              thumbShape:
-                  const RoundSliderThumbShape(enabledThumbRadius: 8),
-              overlayShape:
-                  const RoundSliderOverlayShape(overlayRadius: 18),
+              thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 8),
+              overlayShape: const RoundSliderOverlayShape(overlayRadius: 18),
             ),
             child: Slider(
               value: value.toDouble(),

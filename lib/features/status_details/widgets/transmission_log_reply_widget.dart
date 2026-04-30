@@ -21,7 +21,6 @@ class TransmissionLogReplyWidget extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // Timeline Avatar Column
           SizedBox(
             width: 50,
             child: Column(
@@ -76,14 +75,13 @@ class TransmissionLogReplyWidget extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 8),
-                ]
+                ],
               ],
             ),
           ),
 
           const SizedBox(width: 8),
 
-          // Reply Card
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(bottom: 16),
@@ -129,6 +127,8 @@ class TransmissionLogReplyWidget extends StatelessWidget {
                     TootContentWidget(
                       content: htmlToPlainText(reply.content),
                       imageUrl: firstImageUrl(reply.mediaAttachments),
+                      spoilerText: reply.spoilerText,
+                      sensitive: reply.sensitive,
                       onImageTap: () {
                         final imageUrl = firstImageUrl(reply.mediaAttachments);
                         if (imageUrl != null) {
@@ -144,11 +144,16 @@ class TransmissionLogReplyWidget extends StatelessWidget {
                     const SizedBox(height: 12),
                     Row(
                       children: [
-                        const Icon(Icons.reply,
-                            color: AppColors.primary, size: 16),
+                        const Icon(
+                          Icons.reply,
+                          color: AppColors.primary,
+                          size: 16,
+                        ),
                         const SizedBox(width: 32),
                         Icon(
-                          reply.favourited == true ? Icons.star : Icons.star_border,
+                          reply.favourited == true
+                              ? Icons.star
+                              : Icons.star_border,
                           color: AppColors.primary,
                           size: 16,
                         ),

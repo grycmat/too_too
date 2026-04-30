@@ -28,7 +28,8 @@ class SettingsTileContainer extends StatelessWidget {
         child: InkWell(
           onTap: onTap,
           child: Padding(
-            padding: padding ??
+            padding:
+                padding ??
                 const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
             child: child,
           ),

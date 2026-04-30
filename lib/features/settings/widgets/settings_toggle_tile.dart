@@ -29,9 +29,9 @@ class SettingsToggleTile extends StatelessWidget {
             child: Text(
               title,
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    letterSpacing: 1.2,
-                    fontWeight: FontWeight.w600,
-                  ),
+                letterSpacing: 1.2,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
           Switch(
@@ -41,8 +41,7 @@ class SettingsToggleTile extends StatelessWidget {
             activeTrackColor: AppColors.primary,
             inactiveThumbColor: AppColors.textHint,
             inactiveTrackColor: AppColors.surface,
-            trackOutlineColor:
-                WidgetStateProperty.all(AppColors.border),
+            trackOutlineColor: WidgetStateProperty.all(AppColors.border),
           ),
         ],
       ),

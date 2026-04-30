@@ -85,9 +85,10 @@ class Profile {
       showMedia: json['show_media'] as bool? ?? false,
       showMediaReplies: json['show_media_replies'] as bool? ?? false,
       showFeatured: json['show_featured'] as bool? ?? false,
-      attributionDomains: ((json['attribution_domains'] as List<dynamic>?) ?? const [])
-          .map((d) => d as String)
-          .toList(),
+      attributionDomains:
+          ((json['attribution_domains'] as List<dynamic>?) ?? const [])
+              .map((d) => d as String)
+              .toList(),
     );
   }
 }

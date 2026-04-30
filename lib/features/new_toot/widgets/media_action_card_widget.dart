@@ -17,7 +17,7 @@ class MediaActionCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    
+
     return GestureDetector(
       onTap: onTap,
       child: NeonCardWidget(
@@ -30,17 +30,10 @@ class MediaActionCardWidget extends StatelessWidget {
                 color: colorScheme.surface.withValues(alpha: 0.5),
                 borderRadius: BorderRadius.circular(16),
               ),
-              child: Icon(
-                icon,
-                size: 28,
-                color: colorScheme.primary,
-              ),
+              child: Icon(icon, size: 28, color: colorScheme.primary),
             ),
             const SizedBox(height: 12),
-            Text(
-              label.toUpperCase(),
-              style: theme.textTheme.labelSmall,
-            ),
+            Text(label.toUpperCase(), style: theme.textTheme.labelSmall),
           ],
         ),
       ),

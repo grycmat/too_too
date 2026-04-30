@@ -20,20 +20,24 @@ class ProfileHeaderWidget extends StatelessWidget {
     for (int i = 0; i < words.length; i++) {
       final word = words[i];
       if (word.startsWith('#')) {
-        spans.add(TextSpan(
-          text: '$word ',
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: AppColors.secondary,
-                fontWeight: FontWeight.w600,
-              ),
-        ));
+        spans.add(
+          TextSpan(
+            text: '$word ',
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color: AppColors.secondary,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        );
       } else {
-        spans.add(TextSpan(
-          text: '$word ',
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: AppColors.textSecondary,
-              ),
-        ));
+        spans.add(
+          TextSpan(
+            text: '$word ',
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(color: AppColors.textSecondary),
+          ),
+        );
       }
     }
     return spans;
@@ -46,8 +50,8 @@ class ProfileHeaderWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Banner Image
-        if (account.header.isNotEmpty && !account.header.endsWith('missing.png'))
+        if (account.header.isNotEmpty &&
+            !account.header.endsWith('missing.png'))
           Container(
             height: 140,
             width: double.infinity,
@@ -59,19 +63,13 @@ class ProfileHeaderWidget extends StatelessWidget {
             ),
           )
         else
-          Container(
-            height: 140,
-            width: double.infinity,
-            color: AppColors.card,
-          ),
+          Container(height: 140, width: double.infinity, color: AppColors.card),
 
-        // Avatar + Edit Button Row
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Stack(
             clipBehavior: Clip.none,
             children: [
-              // Avatar
               Positioned(
                 top: -36,
                 child: Container(
@@ -96,9 +94,8 @@ class ProfileHeaderWidget extends StatelessWidget {
                 ),
               ),
 
-              // Edit Button (Placeholder)
               Container(
-                height: 56, // give enough space for the floating avatar
+                height: 56,
                 alignment: Alignment.centerRight,
                 padding: const EdgeInsets.only(top: 8),
                 child: FilledButton(
@@ -109,11 +106,17 @@ class ProfileHeaderWidget extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 0,
+                    ),
                   ),
                   child: const Text(
                     'EDIT PROFILE',
-                    style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1,
+                    ),
                   ),
                 ),
               ),
@@ -121,23 +124,27 @@ class ProfileHeaderWidget extends StatelessWidget {
           ),
         ),
 
-        // Profile Info
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                account.displayName.isNotEmpty ? account.displayName : account.username,
-                style: Theme.of(context).textTheme.headlineLarge?.copyWith(fontSize: 22, letterSpacing: 0),
+                account.displayName.isNotEmpty
+                    ? account.displayName
+                    : account.username,
+                style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                  fontSize: 22,
+                  letterSpacing: 0,
+                ),
               ),
               const SizedBox(height: 4),
               Text(
                 '@${account.acct}',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: AppColors.primaryVariant,
-                      fontWeight: FontWeight.w500,
-                    ),
+                  color: AppColors.primaryVariant,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
               const SizedBox(height: 16),
               if (cleanBio.isNotEmpty)
@@ -147,15 +154,26 @@ class ProfileHeaderWidget extends StatelessWidget {
                   ),
                 ),
               const SizedBox(height: 24),
-              
-              // Stats
+
               Row(
                 children: [
-                  _buildStat(context, account.statusesCount.toString(), 'TOOTS'),
+                  _buildStat(
+                    context,
+                    account.statusesCount.toString(),
+                    'TOOTS',
+                  ),
                   const SizedBox(width: 32),
-                  _buildStat(context, account.followingCount.toString(), 'FOLLOWING'),
+                  _buildStat(
+                    context,
+                    account.followingCount.toString(),
+                    'FOLLOWING',
+                  ),
                   const SizedBox(width: 32),
-                  _buildStat(context, account.followersCount.toString(), 'FOLLOWERS'),
+                  _buildStat(
+                    context,
+                    account.followersCount.toString(),
+                    'FOLLOWERS',
+                  ),
                 ],
               ),
               const SizedBox(height: 16),
@@ -173,18 +191,18 @@ class ProfileHeaderWidget extends StatelessWidget {
         Text(
           count,
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-              ),
+            fontWeight: FontWeight.bold,
+            fontSize: 18,
+          ),
         ),
         const SizedBox(height: 2),
         Text(
           label,
           style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                color: AppColors.textHint,
-                letterSpacing: 1.2,
-                fontSize: 10,
-              ),
+            color: AppColors.textHint,
+            letterSpacing: 1.2,
+            fontSize: 10,
+          ),
         ),
       ],
     );

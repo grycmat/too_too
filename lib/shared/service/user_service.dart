@@ -29,7 +29,9 @@ class UserService {
 
   Future<Account?> getCurrentAccount() async {
     try {
-      final response = await _http.get<Map<String, dynamic>>('/api/v1/accounts/verify_credentials');
+      final response = await _http.get<Map<String, dynamic>>(
+        '/api/v1/accounts/verify_credentials',
+      );
       if (response.data != null) {
         _currentAccount = Account.fromJson(response.data!);
         return _currentAccount;
@@ -42,7 +44,9 @@ class UserService {
 
   Future<Account?> getAccount(String id) async {
     try {
-      final response = await _http.get<Map<String, dynamic>>('/api/v1/accounts/$id');
+      final response = await _http.get<Map<String, dynamic>>(
+        '/api/v1/accounts/$id',
+      );
       if (response.data != null) {
         return Account.fromJson(response.data!);
       }

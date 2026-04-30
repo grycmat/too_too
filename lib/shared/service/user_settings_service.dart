@@ -21,8 +21,7 @@ class UserSettingsService {
       return;
     }
     try {
-      _cache =
-          UserSettings.fromJson(jsonDecode(raw) as Map<String, dynamic>);
+      _cache = UserSettings.fromJson(jsonDecode(raw) as Map<String, dynamic>);
     } catch (e) {
       log('Failed to decode user settings, falling back to defaults: $e');
       _cache = const UserSettings.defaults();

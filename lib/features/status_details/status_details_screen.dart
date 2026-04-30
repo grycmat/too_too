@@ -59,7 +59,7 @@ class _StatusDetailsScreenState extends State<StatusDetailsScreen> {
         return Scaffold(
           body: CustomScrollView(
             slivers: [
-              SliverToBoxAdapter(child: SizedBox(height: 100,),),
+              SliverToBoxAdapter(child: SizedBox(height: 100)),
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(

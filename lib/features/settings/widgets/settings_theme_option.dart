@@ -56,20 +56,19 @@ class SettingsThemeOption extends StatelessWidget {
                     children: [
                       Text(
                         title.toUpperCase(),
-                        style:
-                            Theme.of(context).textTheme.titleMedium?.copyWith(
-                                  letterSpacing: 1.5,
-                                  fontWeight: FontWeight.w700,
-                                ),
+                        style: Theme.of(context).textTheme.titleMedium
+                            ?.copyWith(
+                              letterSpacing: 1.5,
+                              fontWeight: FontWeight.w700,
+                            ),
                       ),
                       const SizedBox(height: 4),
                       Text(
                         description.toUpperCase(),
-                        style:
-                            Theme.of(context).textTheme.bodySmall?.copyWith(
-                                  color: AppColors.textHint,
-                                  letterSpacing: 1,
-                                ),
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: AppColors.textHint,
+                          letterSpacing: 1,
+                        ),
                       ),
                     ],
                   ),

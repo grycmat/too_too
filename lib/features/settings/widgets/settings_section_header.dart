@@ -5,19 +5,14 @@ class SettingsSectionHeader extends StatelessWidget {
   final String label;
   final Color? color;
 
-  const SettingsSectionHeader({
-    super.key,
-    required this.label,
-    this.color,
-  });
+  const SettingsSectionHeader({super.key, required this.label, this.color});
 
   @override
   Widget build(BuildContext context) {
     final accent = color ?? AppColors.primary;
-    final labelStyle = Theme.of(context).textTheme.labelSmall?.copyWith(
-          color: accent,
-          letterSpacing: 2,
-        );
+    final labelStyle = Theme.of(
+      context,
+    ).textTheme.labelSmall?.copyWith(color: accent, letterSpacing: 2);
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(4, 24, 4, 12),
@@ -27,10 +22,7 @@ class SettingsSectionHeader extends StatelessWidget {
           Text(label.toUpperCase(), style: labelStyle),
           const SizedBox(width: 12),
           Expanded(
-            child: Container(
-              height: 1,
-              color: accent.withValues(alpha: 0.25),
-            ),
+            child: Container(height: 1, color: accent.withValues(alpha: 0.25)),
           ),
         ],
       ),

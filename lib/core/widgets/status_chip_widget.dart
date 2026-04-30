@@ -31,9 +31,7 @@ class StatusChipWidget extends StatelessWidget {
       ),
       label: Text(
         label,
-        style: isActive
-            ? TextStyle(color: colorScheme.onPrimary)
-            : null,
+        style: isActive ? TextStyle(color: colorScheme.onPrimary) : null,
       ),
       onPressed: onTap ?? () {},
       backgroundColor: isActive ? colorScheme.primary : null,

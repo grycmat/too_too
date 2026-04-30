@@ -4,10 +4,7 @@ class StatusContext {
   final List<Status> ancestors;
   final List<Status> descendants;
 
-  const StatusContext({
-    required this.ancestors,
-    required this.descendants,
-  });
+  const StatusContext({required this.ancestors, required this.descendants});
 
   factory StatusContext.fromJson(Map<String, dynamic> json) {
     return StatusContext(

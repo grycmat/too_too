@@ -77,9 +77,7 @@ class ComposeAreaWidget extends StatelessWidget {
                         children: [
                           TextSpan(
                             text: '$currentLength',
-                            style: const TextStyle(
-                              color: AppColors.primary,
-                            ),
+                            style: const TextStyle(color: AppColors.primary),
                           ),
                           TextSpan(text: '/$maxLength'),
                         ],

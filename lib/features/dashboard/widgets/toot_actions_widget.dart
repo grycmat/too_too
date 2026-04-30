@@ -64,7 +64,9 @@ class _ActionIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = isActive ? (activeColor ?? AppColors.primary) : AppColors.iconDefault;
+    final color = isActive
+        ? (activeColor ?? AppColors.primary)
+        : AppColors.iconDefault;
     return InkWell(
       borderRadius: BorderRadius.circular(20),
       onTap: onTap ?? () {},

@@ -58,7 +58,6 @@ class _TootCardWidgetState extends State<TootCardWidget> {
         });
       }
     } catch (_) {
-      // silently fail — state stays as-is
     } finally {
       _busy = false;
     }
@@ -85,7 +84,6 @@ class _TootCardWidgetState extends State<TootCardWidget> {
         });
       }
     } catch (_) {
-      // silently fail — state stays as-is
     } finally {
       _busy = false;
     }
@@ -139,12 +137,15 @@ class _TootCardWidgetState extends State<TootCardWidget> {
               TootContentWidget(
                 content: htmlToPlainText(s.content),
                 imageUrl: firstImageUrl(s.mediaAttachments),
+                spoilerText: s.spoilerText,
+                sensitive: s.sensitive,
                 onImageTap: () {
                   final imageUrl = firstImageUrl(s.mediaAttachments);
                   if (imageUrl != null) {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => MediaDetailsScreen(imageUrl: imageUrl),
+                        builder: (context) =>
+                            MediaDetailsScreen(imageUrl: imageUrl),
                       ),
                     );
                   }
