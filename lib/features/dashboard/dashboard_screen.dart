@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:neon/core/di/service_locator.dart';
 import 'package:neon/core/theme/colors.dart';
 import 'package:neon/core/widgets/glow_wrapper.dart';
+import 'package:neon/shared/service/instance_service.dart';
 import 'widgets/app_top_bar_widget.dart';
 import 'widgets/app_bottom_nav_widget.dart';
 
@@ -20,7 +22,7 @@ class DashboardScreen extends StatelessWidget {
         return 'PROVILER_VIEW';
       case 0:
       default:
-        return 'NEON_FEED';
+        return 'FEED :: ${getIt.get<InstanceService>().currentInstance?.domain ?? ''}';
     }
   }
 

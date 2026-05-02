@@ -26,7 +26,7 @@ class TootsListWidget extends StatefulWidget {
 }
 
 class _TootsListWidgetState extends State<TootsListWidget> {
-  final List<Status> _statuses = [];
+  List<Status> _statuses = [];
   final ScrollController _scrollController = ScrollController();
 
   bool _loading = false;
@@ -112,7 +112,10 @@ class _TootsListWidgetState extends State<TootsListWidget> {
         if (result.isEmpty) {
           _hasReachedEnd = true;
         } else {
-          _statuses.addAll(result);
+          final nextStatuses = [..._statuses, ...result];
+          setState(() {
+            _statuses = nextStatuses;
+          });
         }
         _isLoadingMore = false;
       });

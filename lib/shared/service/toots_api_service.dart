@@ -6,6 +6,8 @@ import 'package:neon/features/dashboard/models/status_context.dart';
 import 'package:neon/features/dashboard/models/notification.dart';
 import 'app_http_service.dart';
 
+const DEFAULT_LIMIT = 50;
+
 class TootsApiService {
   final AppHttpService _http;
 
@@ -15,7 +17,7 @@ class TootsApiService {
     String? maxId,
     String? sinceId,
     String? minId,
-    int limit = 20,
+    int limit = DEFAULT_LIMIT,
   }) async {
     final response = await _http.get<List<dynamic>>(
       '/api/v1/timelines/home',
@@ -36,7 +38,7 @@ class TootsApiService {
     String? maxId,
     String? sinceId,
     String? minId,
-    int limit = 20,
+    int limit = DEFAULT_LIMIT,
     bool local = false,
   }) async {
     final response = await _http.get<List<dynamic>>(
@@ -59,7 +61,7 @@ class TootsApiService {
     String? maxId,
     String? sinceId,
     String? minId,
-    int limit = 20,
+    int limit = DEFAULT_LIMIT,
   }) async {
     final response = await _http.get<List<dynamic>>(
       '/api/v1/notifications',
@@ -81,7 +83,7 @@ class TootsApiService {
     String? maxId,
     String? sinceId,
     String? minId,
-    int limit = 20,
+    int limit = DEFAULT_LIMIT,
   }) async {
     final response = await _http.get<List<dynamic>>(
       '/api/v1/accounts/$accountId/statuses',
