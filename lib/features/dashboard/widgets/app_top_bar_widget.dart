@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 class AppTopBarWidget extends StatelessWidget {
   final String title;
 
-  const AppTopBarWidget({super.key, this.title = 'FEED'});
+  const AppTopBarWidget({super.key, this.title = 'NEON_FEED'});
 
   @override
   Widget build(BuildContext context) {

@@ -19,7 +19,7 @@ class TransmissionLogsWidget extends StatelessWidget {
           Row(
             children: [
               Text(
-                'CONVERSATION',
+                '// THREAD',
                 style: Theme.of(context).textTheme.labelSmall?.copyWith(
                   color: AppColors.primary,
                   fontWeight: FontWeight.w900,

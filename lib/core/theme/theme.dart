@@ -53,7 +53,7 @@ class AppTheme {
 
       textTheme: const TextTheme(
         headlineLarge: TextStyle(
-          color: AppColors.textPrimary,
+          color: AppColors.primary,
           fontSize: 26,
           fontWeight: FontWeight.w700,
           letterSpacing: 2,

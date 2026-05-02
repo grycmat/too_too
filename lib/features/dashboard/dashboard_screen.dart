@@ -10,6 +10,20 @@ class DashboardScreen extends StatelessWidget {
 
   const DashboardScreen({super.key, required this.navigationShell});
 
+  String _getTopBarTitle(int currentIndex) {
+    switch (currentIndex) {
+      case 1:
+        return 'INCOMING :: NOTIFY';
+      case 2:
+        return 'EXPLORE';
+      case 3:
+        return 'PROVILER_VIEW';
+      case 0:
+      default:
+        return 'NEON_FEED';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +32,7 @@ class DashboardScreen extends StatelessWidget {
       body: Stack(
         children: [
           Column(children: [Expanded(child: navigationShell)]),
-          const AppTopBarWidget(),
+          AppTopBarWidget(title: _getTopBarTitle(navigationShell.currentIndex)),
           Positioned(
             bottom: 0,
             left: 0,

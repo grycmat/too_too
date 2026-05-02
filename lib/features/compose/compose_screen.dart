@@ -169,9 +169,11 @@ class _ComposeScreenState extends State<ComposeScreen> {
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text(
-          _quoteStatus != null ? '• QUOTE_TOOT' : 'Compose',
+          _quoteStatus != null ? '• QUOTE_TOOT' : '• NEW_TRANSMISSION',
           style: theme.textTheme.titleLarge?.copyWith(
-            color: _quoteStatus != null ? AppColors.secondary : colorScheme.onSurface,
+            color: _quoteStatus != null
+                ? AppColors.secondary
+                : AppColors.primary,
             fontWeight: FontWeight.bold,
             letterSpacing: _quoteStatus != null ? 1.5 : 0,
           ),

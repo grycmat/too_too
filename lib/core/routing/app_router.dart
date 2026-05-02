@@ -38,6 +38,11 @@ final GoRouter appRouter = GoRouter(
         return ComposeScreen(quoteStatus: quoteStatus);
       },
     ),
+    GoRoute(
+      path: 'status/:id',
+      builder: (context, state) =>
+          StatusDetailsScreen(statusId: state.pathParameters['id']!),
+    ),
 
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {

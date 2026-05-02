@@ -3,7 +3,8 @@ import 'core/di/service_locator.dart';
 import 'core/theme/theme.dart';
 import 'core/routing/app_router.dart';
 import 'shared/service/auth_service.dart';
-import 'shared/service/user_service.dart';
+import 'package:neon/shared/service/user_service.dart';
+import 'package:neon/shared/service/instance_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -11,6 +12,7 @@ void main() async {
   final isLogged = await getIt<AuthService>().tryRestoreSession();
   if (isLogged) {
     await getIt<UserService>().getCurrentUserProfile();
+    await getIt<InstanceService>().fetchInstanceData();
   }
   runApp(const NeonApp());
 }
