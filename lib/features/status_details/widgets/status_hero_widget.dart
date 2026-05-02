@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:neon/core/di/service_locator.dart';
 import 'package:neon/core/theme/colors.dart';
 import 'package:neon/features/dashboard/models/status.dart';
@@ -139,7 +140,7 @@ class _StatusHeroWidgetState extends State<StatusHeroWidget> {
                 ),
                 child: Text(
                   domain.toUpperCase(),
-                  style: const TextStyle(
+                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
                     color: AppColors.textPrimary,
                     fontSize: 10,
                     fontWeight: FontWeight.bold,
@@ -169,7 +170,7 @@ class _StatusHeroWidgetState extends State<StatusHeroWidget> {
           const SizedBox(height: 16),
           Text(
             '${s.createdAt.hour.toString().padLeft(2, '0')}:${s.createdAt.minute.toString().padLeft(2, '0')} // ${s.createdAt.day} ${s.createdAt.month} ${s.createdAt.year}  •  ${s.application?.name?.toUpperCase() ?? "WEB"}',
-            style: const TextStyle(
+            style: Theme.of(context).textTheme.labelSmall?.copyWith(
               color: AppColors.textHint,
               fontWeight: FontWeight.bold,
               fontSize: 10,
@@ -187,6 +188,7 @@ class _StatusHeroWidgetState extends State<StatusHeroWidget> {
             isReblogged: _isReblogged,
             onFavouriteToggle: _toggleFavourite,
             onReblogToggle: _toggleReblog,
+            onQuoteTap: () => context.push('/compose', extra: s),
           ),
         ],
       ),

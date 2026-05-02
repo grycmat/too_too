@@ -162,6 +162,7 @@ class _TootCardWidgetState extends State<TootCardWidget> {
                 isReblogged: _isReblogged,
                 onFavouriteToggle: _toggleFavourite,
                 onReblogToggle: _toggleReblog,
+                onQuoteTap: () => context.push('/compose', extra: s),
               ),
             ],
           ),

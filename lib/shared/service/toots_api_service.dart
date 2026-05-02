@@ -148,6 +148,7 @@ class TootsApiService {
     String visibility = 'public',
     String? spoilerText,
     String? inReplyToId,
+    String? quoteId,
     bool sensitive = false,
   }) async {
     final body = <String, dynamic>{
@@ -157,6 +158,7 @@ class TootsApiService {
       if (spoilerText != null && spoilerText.isNotEmpty)
         'spoiler_text': spoilerText,
       if (inReplyToId != null) 'in_reply_to_id': inReplyToId,
+      if (quoteId != null) 'quoted_status_id': quoteId,
       if (sensitive) 'sensitive': true,
     };
 

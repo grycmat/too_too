@@ -131,14 +131,15 @@ class _TootContentWidgetState extends State<TootContentWidget>
                                   ),
                                 ),
                               ),
-                              child: const Text(
+                              child: Text(
                                 'SENSITIVE CONTENT — TAP TO REVEAL',
-                                style: TextStyle(
-                                  color: AppColors.warning,
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w700,
-                                  letterSpacing: 1.0,
-                                ),
+                                style: Theme.of(context).textTheme.labelSmall
+                                    ?.copyWith(
+                                      color: AppColors.warning,
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.w700,
+                                      letterSpacing: 1.0,
+                                    ),
                               ),
                             ),
                           ],
@@ -185,7 +186,7 @@ class _SpoilerBar extends StatelessWidget {
           Expanded(
             child: Text(
               spoilerText,
-              style: const TextStyle(
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                 color: AppColors.warning,
                 fontSize: 13,
                 fontWeight: FontWeight.w600,
@@ -208,10 +209,10 @@ class _SpoilerBar extends StatelessWidget {
               ),
               child: Text(
                 isRevealed ? 'HIDE' : 'SHOW',
-                style: const TextStyle(
+                style: Theme.of(context).textTheme.labelSmall?.copyWith(
                   color: AppColors.warning,
                   fontSize: 11,
-                  fontWeight: FontWeight.w800,
+                  fontWeight: FontWeight.w700,
                   letterSpacing: 1.2,
                 ),
               ),

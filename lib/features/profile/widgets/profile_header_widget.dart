@@ -111,11 +111,12 @@ class ProfileHeaderWidget extends StatelessWidget {
                       vertical: 0,
                     ),
                   ),
-                  child: const Text(
+                  child: Text(
                     'EDIT PROFILE',
-                    style: TextStyle(
+                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                       letterSpacing: 1,
+                      color: AppColors.background,
                     ),
                   ),
                 ),

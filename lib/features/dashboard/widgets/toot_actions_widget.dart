@@ -9,6 +9,7 @@ class TootActionsWidget extends StatelessWidget {
   final bool isReblogged;
   final VoidCallback? onFavouriteToggle;
   final VoidCallback? onReblogToggle;
+  final VoidCallback? onQuoteTap;
 
   const TootActionsWidget({
     super.key,
@@ -19,6 +20,7 @@ class TootActionsWidget extends StatelessWidget {
     this.isReblogged = false,
     this.onFavouriteToggle,
     this.onReblogToggle,
+    this.onQuoteTap,
   });
 
   @override
@@ -34,6 +36,7 @@ class TootActionsWidget extends StatelessWidget {
           activeColor: AppColors.accent,
           onTap: onReblogToggle,
         ),
+        _ActionIcon(icon: Icons.format_quote_rounded, onTap: onQuoteTap),
         _ActionIcon(
           icon: isFavourited ? Icons.star_rounded : Icons.star_border_rounded,
           count: stars,

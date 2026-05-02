@@ -48,7 +48,7 @@ class TransmissionLogReplyWidget extends StatelessWidget {
                             reply.account.displayName.isNotEmpty
                                 ? reply.account.displayName[0].toUpperCase()
                                 : '?',
-                            style: const TextStyle(
+                            style: Theme.of(context).textTheme.labelSmall?.copyWith(
                               color: AppColors.primary,
                               fontWeight: FontWeight.w700,
                               fontSize: 12,
@@ -103,7 +103,7 @@ class TransmissionLogReplyWidget extends StatelessWidget {
                             reply.account.displayName.isNotEmpty
                                 ? reply.account.displayName.toUpperCase()
                                 : reply.account.username.toUpperCase(),
-                            style: const TextStyle(
+                            style: Theme.of(context).textTheme.labelSmall?.copyWith(
                               color: AppColors.textPrimary,
                               fontWeight: FontWeight.bold,
                               fontSize: 12,
@@ -115,7 +115,7 @@ class TransmissionLogReplyWidget extends StatelessWidget {
                         ),
                         Text(
                           relativeTime(reply.createdAt).toUpperCase(),
-                          style: const TextStyle(
+                          style: Theme.of(context).textTheme.labelSmall?.copyWith(
                             color: AppColors.textHint,
                             fontSize: 10,
                             fontWeight: FontWeight.bold,

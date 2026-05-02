@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:neon/core/theme/colors.dart';
 import 'package:neon/core/widgets/glow_wrapper.dart';
-import 'package:neon/features/new_toot/new_toot_screen.dart';
 import 'widgets/app_top_bar_widget.dart';
 import 'widgets/app_bottom_nav_widget.dart';
 
@@ -37,16 +36,7 @@ class DashboardScreen extends StatelessWidget {
             right: 20,
             child: FloatingActionButton(
               onPressed: () {
-                showModalBottomSheet(
-                  showDragHandle: true,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  context: context,
-                  isScrollControlled: true,
-                  useSafeArea: true,
-                  builder: (context) => const NewTootScreen(),
-                );
+                context.push('/compose');
               },
               child: SizedBox(
                 width: 56,

@@ -18,9 +18,9 @@ class TransmissionLogsWidget extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Text(
+              Text(
                 'CONVERSATION',
-                style: TextStyle(
+                style: Theme.of(context).textTheme.labelSmall?.copyWith(
                   color: AppColors.primary,
                   fontWeight: FontWeight.w900,
                   letterSpacing: 2,

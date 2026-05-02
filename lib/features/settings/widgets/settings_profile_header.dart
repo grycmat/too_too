@@ -42,7 +42,7 @@ class SettingsProfileHeader extends StatelessWidget {
                   displayName.toUpperCase(),
                   style: theme.textTheme.titleMedium?.copyWith(
                     fontSize: 18,
-                    fontWeight: FontWeight.w800,
+                    fontWeight: FontWeight.w700,
                     letterSpacing: 1.8,
                   ),
                   overflow: TextOverflow.ellipsis,

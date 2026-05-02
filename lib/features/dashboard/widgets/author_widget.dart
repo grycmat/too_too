@@ -54,7 +54,7 @@ class AuthorWidget extends StatelessWidget {
               child: avatarUrl == null
                   ? Text(
                       name.isNotEmpty ? name[0].toUpperCase() : '?',
-                      style: const TextStyle(
+                      style: tt.labelMedium?.copyWith(
                         color: AppColors.primary,
                         fontWeight: FontWeight.w700,
                         fontSize: 18,

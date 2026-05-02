@@ -85,7 +85,7 @@ class NotificationCardWidget extends StatelessWidget {
             children: [
               Text(
                 '@${notification.account.username}',
-                style: const TextStyle(
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
                   color: AppColors.textPrimary,
                   fontWeight: FontWeight.w700,
                   fontSize: 15,
@@ -95,7 +95,10 @@ class NotificationCardWidget extends StatelessWidget {
               ),
               Text(
                 relativeTime(notification.createdAt),
-                style: const TextStyle(color: AppColors.textHint, fontSize: 12),
+                style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                  color: AppColors.textHint,
+                  fontSize: 12,
+                ),
               ),
             ],
           ),
@@ -156,7 +159,7 @@ class NotificationCardWidget extends StatelessWidget {
         children: [
           RichText(
             text: TextSpan(
-              style: const TextStyle(
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                 color: AppColors.textSecondary,
                 fontSize: 14,
               ),
@@ -165,7 +168,7 @@ class NotificationCardWidget extends StatelessWidget {
                   text: notification.account.displayName.isNotEmpty
                       ? notification.account.displayName
                       : notification.account.username,
-                  style: const TextStyle(
+                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
                     color: AppColors.textPrimary,
                     fontWeight: FontWeight.w700,
                   ),
@@ -194,7 +197,7 @@ class NotificationCardWidget extends StatelessWidget {
                 ),
                 child: Text(
                   '"${htmlToPlainText(status.content)}"',
-                  style: const TextStyle(
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: AppColors.textSecondary,
                     fontStyle: FontStyle.italic,
                     height: 1.4,
@@ -221,7 +224,7 @@ class NotificationCardWidget extends StatelessWidget {
         children: [
           RichText(
             text: TextSpan(
-              style: const TextStyle(
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                 color: AppColors.textSecondary,
                 fontSize: 14,
               ),
@@ -230,7 +233,7 @@ class NotificationCardWidget extends StatelessWidget {
                   text: notification.account.displayName.isNotEmpty
                       ? notification.account.displayName
                       : notification.account.username,
-                  style: const TextStyle(
+                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
                     color: AppColors.textPrimary,
                     fontWeight: FontWeight.w700,
                   ),
@@ -259,7 +262,7 @@ class NotificationCardWidget extends StatelessWidget {
                 ),
                 child: Text(
                   '"${htmlToPlainText(status.content)}"',
-                  style: const TextStyle(
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: AppColors.textSecondary,
                     fontStyle: FontStyle.italic,
                     height: 1.4,
@@ -301,16 +304,16 @@ class NotificationCardWidget extends StatelessWidget {
                     notification.account.displayName.isNotEmpty
                         ? notification.account.displayName
                         : notification.account.username,
-                    style: const TextStyle(
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       color: AppColors.textPrimary,
                       fontWeight: FontWeight.w700,
                       fontSize: 15,
                     ),
                   ),
                   const SizedBox(height: 4),
-                  const Text(
+                  Text(
                     'FOLLOWED YOU',
-                    style: TextStyle(
+                    style: Theme.of(context).textTheme.labelSmall?.copyWith(
                       color: AppColors.secondaryVariant,
                       fontSize: 11,
                       fontWeight: FontWeight.w700,
@@ -336,9 +339,9 @@ class NotificationCardWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(6),
                 ),
               ),
-              child: const Text(
+              child: Text(
                 'FOLLOW BACK',
-                style: TextStyle(
+                style: Theme.of(context).textTheme.labelSmall?.copyWith(
                   fontSize: 11,
                   letterSpacing: 0.5,
                   fontWeight: FontWeight.w700,

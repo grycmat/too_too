@@ -9,6 +9,7 @@ class AppTheme {
     return ThemeData(
       brightness: Brightness.dark,
       useMaterial3: true,
+      fontFamily: 'Rajdhani',
       scaffoldBackgroundColor: AppColors.background,
       colorScheme: const ColorScheme.dark(
         primary: AppColors.primary,
@@ -36,6 +37,7 @@ class AppTheme {
           fontSize: 22,
           fontWeight: FontWeight.w700,
           letterSpacing: 1.5,
+          fontFamily: 'JetBrains_Mono',
         ),
       ),
 
@@ -53,13 +55,13 @@ class AppTheme {
         headlineLarge: TextStyle(
           color: AppColors.textPrimary,
           fontSize: 26,
-          fontWeight: FontWeight.w800,
+          fontWeight: FontWeight.w700,
           letterSpacing: 2,
         ),
         headlineMedium: TextStyle(
           color: AppColors.textPrimary,
           fontSize: 28,
-          fontWeight: FontWeight.w800,
+          fontWeight: FontWeight.w700,
           letterSpacing: 8,
         ),
         titleMedium: TextStyle(
@@ -93,12 +95,14 @@ class AppTheme {
           color: AppColors.textSecondary,
           fontSize: 12,
           fontWeight: FontWeight.w500,
+          fontFamily: 'JetBrains_Mono',
         ),
         labelSmall: TextStyle(
           color: AppColors.primary,
           fontSize: 11,
           fontWeight: FontWeight.w600,
           letterSpacing: 1.5,
+          fontFamily: 'JetBrains_Mono',
         ),
       ),
 
@@ -180,6 +184,7 @@ class AppTheme {
             fontSize: 15,
             fontWeight: FontWeight.w600,
             letterSpacing: 0.8,
+            fontFamily: 'JetBrains_Mono',
           ),
         ),
       ),
@@ -196,6 +201,7 @@ class AppTheme {
             fontSize: 15,
             fontWeight: FontWeight.w600,
             letterSpacing: 0.8,
+            fontFamily: 'JetBrains_Mono',
           ),
         ),
       ),
@@ -207,6 +213,7 @@ class AppTheme {
           color: AppColors.primary,
           fontSize: 13,
           fontWeight: FontWeight.w500,
+          fontFamily: 'JetBrains_Mono',
         ),
         side: const BorderSide(color: AppColors.primary, width: 0.8),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
