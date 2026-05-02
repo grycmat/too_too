@@ -70,7 +70,7 @@ class AppTheme {
           fontWeight: FontWeight.w600,
         ),
         titleSmall: TextStyle(
-          color: AppColors.textSecondary,
+          color: AppColors.secondary,
           fontSize: 13,
           fontWeight: FontWeight.w400,
         ),
