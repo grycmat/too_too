@@ -27,10 +27,10 @@ Audit of current state + gap analysis against baseline Mastodon client expectati
 Must-have before a reasonable person would use this as a daily Mastodon client.
 
 ### 2.1 Timeline & reading
-- [ ] **Pagination / infinite scroll** on home, public, notifications, profile, thread lists. API already supports `max_id`; wire scroll controller → `getUserTimeline(maxId: lastId)`.
+- [x] **Pagination / infinite scroll** on home, public, notifications, profile, thread lists. API already supports `max_id`; wire scroll controller → `getUserTimeline(maxId: lastId)`.
 - [ ] **Pull-to-refresh prepends new toots** (use `min_id` / `since_id`) instead of replacing list.
-- [ ] **Content warning / spoiler collapse** — honor `sensitive` + `spoilerText`; tap to reveal.
-- [ ] **Sensitive media blur** with tap-to-reveal.
+- [x] **Content warning / spoiler collapse** — honor `sensitive` + `spoilerText`; tap to reveal.
+- [x] **Sensitive media blur** with tap-to-reveal.
 - [ ] **Multiple media attachments** in card + swipeable viewer (current `firstImageUrl` shows only index 0).
 - [ ] **Video / GIFV playback** (`video_player` + `chewie` or `better_player`). Required — many posts are video.
 - [ ] **Render ancestors** in status details (currently only descendants).
@@ -38,11 +38,12 @@ Must-have before a reasonable person would use this as a daily Mastodon client.
 - [ ] **Custom emoji** rendering in display names / content (`emojis` field on Account/Status).
 - [ ] **Clickable mentions, hashtags, links** inside toot content (currently plain text via `htmlToPlainText`).
 - [ ] **Polls** render + vote.
+- [ ] **Foldadble devices support** two panes in large screen with master on left and detail on the right.
 
 ### 2.2 Composing & interacting
 - [ ] **Reply** button on toot card + pre-filled compose with `inReplyToId` + mention prefix.
 - [ ] **Bookmark** action (field on model, no button; `/statuses/:id/bookmark`).
-- [ ] **Content warning input** in compose (chip is placeholder).
+- [x] **Content warning input** in compose (chip is placeholder).
 - [ ] **Visibility picker** in compose (chip is placeholder) — public / unlisted / followers / direct.
 - [ ] **Language picker** in compose (chip is placeholder).
 - [ ] **Alt text / media description** on upload (accessibility — Play Store scorecard).

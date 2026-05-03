@@ -5,13 +5,17 @@ import 'package:neon/features/dashboard/utils/status_formatting.dart';
 import 'package:neon/features/dashboard/widgets/author_widget.dart';
 import 'package:neon/features/dashboard/widgets/toot_content_widget.dart';
 
-class QuotedStatusWidget extends StatelessWidget {
+class StatusPreviewWidget extends StatelessWidget {
   final Status status;
+  final String label;
+  final Color accentColor;
   final VoidCallback? onClear;
 
-  const QuotedStatusWidget({
+  const StatusPreviewWidget({
     super.key,
     required this.status,
+    required this.label,
+    required this.accentColor,
     this.onClear,
   });
 
@@ -19,7 +23,6 @@ class QuotedStatusWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final s = status.reblog ?? status;
     final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
 
     return Stack(
       children: [
@@ -30,7 +33,7 @@ class QuotedStatusWidget extends StatelessWidget {
             color: AppColors.card.withValues(alpha: 0.5),
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
-              color: AppColors.secondary.withValues(alpha: 0.5),
+              color: accentColor.withValues(alpha: 0.5),
               width: 1,
             ),
           ),
@@ -40,9 +43,9 @@ class QuotedStatusWidget extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    'QUOTING ↓',
+                    label,
                     style: theme.textTheme.labelSmall?.copyWith(
-                      color: AppColors.secondary,
+                      color: accentColor,
                       fontWeight: FontWeight.bold,
                       letterSpacing: 2,
                     ),
@@ -62,7 +65,7 @@ class QuotedStatusWidget extends StatelessWidget {
               const SizedBox(height: 12),
               TootContentWidget(
                 content: htmlToPlainText(s.content),
-                imageUrl: firstImageUrl(s.mediaAttachments),
+                mediaAttachments: s.mediaAttachments,
                 spoilerText: s.spoilerText,
                 sensitive: s.sensitive,
               ),
@@ -102,12 +105,12 @@ class QuotedStatusWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: AppColors.surface,
                   shape: BoxShape.circle,
-                  border: Border.all(color: AppColors.secondary),
+                  border: Border.all(color: accentColor),
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.close,
                   size: 16,
-                  color: AppColors.secondary,
+                  color: accentColor,
                 ),
               ),
             ),

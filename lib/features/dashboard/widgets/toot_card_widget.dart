@@ -136,16 +136,21 @@ class _TootCardWidgetState extends State<TootCardWidget> {
 
               TootContentWidget(
                 content: htmlToPlainText(s.content),
-                imageUrl: firstImageUrl(s.mediaAttachments),
+                mediaAttachments: s.mediaAttachments,
                 spoilerText: s.spoilerText,
                 sensitive: s.sensitive,
-                onImageTap: () {
-                  final imageUrl = firstImageUrl(s.mediaAttachments);
-                  if (imageUrl != null) {
+                onImageTap: (index) {
+                  final imageUrls = s.mediaAttachments
+                      .where((a) => a.type == 'image' && a.url.isNotEmpty)
+                      .map((a) => a.url)
+                      .toList();
+                  if (imageUrls.isNotEmpty) {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) =>
-                            MediaDetailsScreen(imageUrl: imageUrl),
+                        builder: (context) => MediaDetailsScreen(
+                          imageUrls: imageUrls,
+                          initialIndex: index,
+                        ),
                       ),
                     );
                   }
@@ -162,7 +167,8 @@ class _TootCardWidgetState extends State<TootCardWidget> {
                 isReblogged: _isReblogged,
                 onFavouriteToggle: _toggleFavourite,
                 onReblogToggle: _toggleReblog,
-                onQuoteTap: () => context.push('/compose', extra: s),
+                onQuoteTap: () => context.push('/compose', extra: {'quote': s}),
+                onReplyTap: () => context.push('/compose', extra: {'reply': s}),
               ),
             ],
           ),

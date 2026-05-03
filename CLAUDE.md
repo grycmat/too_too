@@ -41,3 +41,15 @@ Code is organized as `lib/features/<feature>/` with `<feature>_screen.dart`, opt
 - `lib/core/widgets/` — reusable styled primitives (`GlowWrapper`, `AppTextField`, `NeonCardWidget`, `AvatarWidget`).
 - `lib/core/theme/` — design tokens (`AppColors`, `AppTheme.darkTheme`); use these rather than hard-coding colors to keep the neon-glow aesthetic consistent.
 - `lib/shared/service/` and `lib/shared/widgets/` — app-wide services (`AuthService`, `AppHttpService`, `TootsApiService`, `UserService`, `UserSettingsService`, `OAuthCallbackHandler`) and generic widgets (`AppButton`, `LinkButton`). New services go here and are wired up in `lib/core/di/service_locator.dart`.
+
+### State management
+No reactive state library is used. Screens call `getIt<ServiceName>().method()` and update with `setState()`. State is **not automatically reactive across screens** — if settings change in one screen, another screen won't reflect it unless it explicitly reloads on resume.
+
+### TootsApiService (pagination)
+Mastodon cursor-based pagination uses three optional parameters: `maxId` (older items), `sinceId` (newer items), `minId` (catch-up). Callers are responsible for tracking cursors. All methods return deserialized objects or throw on null response data.
+
+### UserSettingsService
+Settings are persisted as a single JSON-encoded string under `'user_settings'` in `SharedPreferences`, with a synchronous in-memory `_cache`. Always call `load()` before first access (done in the auth-restore path). Use `setThemeVariant()` and similar setters (which call `update()` + `copyWith()`) rather than mutating the object directly.
+
+### Theme conventions
+Color tokens live in `AppColors`. Key accents: `primary`/`primaryGlow` (cyan `#00E5FF`), `secondary`/`secondaryGlow` (magenta `#FF00E5`), `accent` (lime `#39FF14`). Typography uses **Rajdhani** for body/UI and **JetBrains Mono** for labels/titles, with wide letter-spacing (1.5–8) for the cyberpunk aesthetic. Always use `AppColors` and `AppTheme` tokens — never hard-code colors or text styles.

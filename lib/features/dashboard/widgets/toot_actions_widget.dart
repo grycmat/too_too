@@ -10,6 +10,7 @@ class TootActionsWidget extends StatelessWidget {
   final VoidCallback? onFavouriteToggle;
   final VoidCallback? onReblogToggle;
   final VoidCallback? onQuoteTap;
+  final VoidCallback? onReplyTap;
 
   const TootActionsWidget({
     super.key,
@@ -21,6 +22,7 @@ class TootActionsWidget extends StatelessWidget {
     this.onFavouriteToggle,
     this.onReblogToggle,
     this.onQuoteTap,
+    this.onReplyTap,
   });
 
   @override
@@ -28,7 +30,7 @@ class TootActionsWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        _ActionIcon(icon: Icons.reply_rounded, count: replies),
+        _ActionIcon(icon: Icons.reply_rounded, count: replies, onTap: onReplyTap),
         _ActionIcon(
           icon: isReblogged ? Icons.repeat_rounded : Icons.repeat_rounded,
           count: retoots,

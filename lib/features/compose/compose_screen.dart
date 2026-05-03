@@ -15,13 +15,14 @@ import 'package:neon/shared/widgets/app_button.widget.dart';
 import 'widgets/compose_area_widget.dart';
 import 'widgets/image_preview_grid_widget.dart';
 import 'widgets/media_action_card_widget.dart';
-import 'widgets/quoted_status_widget.dart';
+import 'widgets/status_preview_widget.dart';
 
 class ComposeScreen extends StatefulWidget {
   final Status? quoteStatus;
+  final Status? replyStatus;
 
   @Preview(name: 'New Toot Screen')
-  const ComposeScreen({super.key, this.quoteStatus});
+  const ComposeScreen({super.key, this.quoteStatus, this.replyStatus});
 
   @override
   State<ComposeScreen> createState() => _ComposeScreenState();
@@ -41,13 +42,24 @@ class _ComposeScreenState extends State<ComposeScreen> {
   bool _showSpoiler = false;
   bool _isSensitive = false;
   Status? _quoteStatus;
+  Status? _replyStatus;
 
   @override
   void initState() {
     super.initState();
     _quoteStatus = widget.quoteStatus;
+    _replyStatus = widget.replyStatus;
     _textController.addListener(_updateLength);
     _spoilerController.addListener(_updateSpoilerLength);
+
+    if (_replyStatus != null) {
+      final replyAccount = (_replyStatus!.reblog ?? _replyStatus!).account;
+      final mention = '@${replyAccount.acct} ';
+      _textController.text = mention;
+      _textController.selection = TextSelection.fromPosition(
+        TextPosition(offset: mention.length),
+      );
+    }
   }
 
   @override
@@ -113,6 +125,9 @@ class _ComposeScreenState extends State<ComposeScreen> {
         mediaIds: mediaIds.isNotEmpty ? mediaIds : null,
         spoilerText: _showSpoiler ? _spoilerController.text.trim() : null,
         quoteId: _quoteStatus?.id,
+        inReplyToId: _replyStatus != null
+            ? (_replyStatus!.reblog ?? _replyStatus!).id
+            : null,
         sensitive: _isSensitive,
       );
 
@@ -169,13 +184,19 @@ class _ComposeScreenState extends State<ComposeScreen> {
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text(
-          _quoteStatus != null ? '• QUOTE_TOOT' : '• NEW_TRANSMISSION',
+          _replyStatus != null
+              ? '• REPLY'
+              : _quoteStatus != null
+                  ? '• QUOTE_TOOT'
+                  : '• NEW_TRANSMISSION',
           style: theme.textTheme.titleLarge?.copyWith(
-            color: _quoteStatus != null
-                ? AppColors.secondary
-                : AppColors.primary,
+            color: _replyStatus != null
+                ? AppColors.primary
+                : _quoteStatus != null
+                    ? AppColors.secondary
+                    : AppColors.primary,
             fontWeight: FontWeight.bold,
-            letterSpacing: _quoteStatus != null ? 1.5 : 0,
+            letterSpacing: _replyStatus != null || _quoteStatus != null ? 1.5 : 0,
           ),
         ),
       ),
@@ -229,10 +250,27 @@ class _ComposeScreenState extends State<ComposeScreen> {
                   ),
                 ),
 
+                if (_replyStatus != null) ...[
+                  const SizedBox(height: 16),
+                  StatusPreviewWidget(
+                    status: _replyStatus!,
+                    label: 'REPLYING TO ↓',
+                    accentColor: AppColors.primary,
+                    onClear: () {
+                      setState(() {
+                        _replyStatus = null;
+                        _textController.clear();
+                      });
+                    },
+                  ),
+                ],
+
                 if (_quoteStatus != null) ...[
                   const SizedBox(height: 16),
-                  QuotedStatusWidget(
+                  StatusPreviewWidget(
                     status: _quoteStatus!,
+                    label: 'QUOTING ↓',
+                    accentColor: AppColors.secondary,
                     onClear: () {
                       setState(() {
                         _quoteStatus = null;
@@ -325,7 +363,7 @@ class _ComposeScreenState extends State<ComposeScreen> {
                 ),
                 SizedBox(height: 24),
                 AppButtonWidget(
-                  label: _quoteStatus != null ? 'POST' : 'TOOT',
+                  label: (_replyStatus != null || _quoteStatus != null) ? 'POST' : 'TOOT',
                   onPressed: _isPosting ? null : _postToot,
                 ),
                 SizedBox(height: 24),

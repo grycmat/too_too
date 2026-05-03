@@ -126,16 +126,21 @@ class TransmissionLogReplyWidget extends StatelessWidget {
                     const SizedBox(height: 12),
                     TootContentWidget(
                       content: htmlToPlainText(reply.content),
-                      imageUrl: firstImageUrl(reply.mediaAttachments),
+                      mediaAttachments: reply.mediaAttachments,
                       spoilerText: reply.spoilerText,
                       sensitive: reply.sensitive,
-                      onImageTap: () {
-                        final imageUrl = firstImageUrl(reply.mediaAttachments);
-                        if (imageUrl != null) {
+                      onImageTap: (index) {
+                        final imageUrls = reply.mediaAttachments
+                            .where((a) => a.type == 'image' && a.url.isNotEmpty)
+                            .map((a) => a.url)
+                            .toList();
+                        if (imageUrls.isNotEmpty) {
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  MediaDetailsScreen(imageUrl: imageUrl),
+                              builder: (context) => MediaDetailsScreen(
+                                imageUrls: imageUrls,
+                                initialIndex: index,
+                              ),
                             ),
                           );
                         }

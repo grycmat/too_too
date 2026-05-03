@@ -3,18 +3,19 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:neon/core/theme/colors.dart';
+import 'package:neon/features/dashboard/models/status.dart';
 
 class TootContentWidget extends StatefulWidget {
   final String content;
-  final String? imageUrl;
-  final VoidCallback? onImageTap;
+  final List<MediaAttachment> mediaAttachments;
+  final void Function(int index)? onImageTap;
   final String? spoilerText;
   final bool sensitive;
 
   const TootContentWidget({
     super.key,
     required this.content,
-    this.imageUrl,
+    this.mediaAttachments = const [],
     this.onImageTap,
     this.spoilerText,
     this.sensitive = false,
@@ -32,11 +33,16 @@ class _TootContentWidgetState extends State<TootContentWidget>
   bool get _hasSpoiler =>
       widget.spoilerText != null && widget.spoilerText!.isNotEmpty;
 
+  List<MediaAttachment> get _imageAttachments => widget.mediaAttachments
+      .where((a) => a.type == 'image' && a.url.isNotEmpty)
+      .toList();
+
   @override
   Widget build(BuildContext context) {
     final showCwBar = _hasSpoiler;
     final hideContent = _hasSpoiler && !_contentRevealed;
     final hideMedia = widget.sensitive && !_mediaRevealed;
+    final images = _imageAttachments;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,32 +66,150 @@ class _TootContentWidgetState extends State<TootContentWidget>
           duration: const Duration(milliseconds: 200),
         ),
 
-        if (widget.imageUrl != null && !hideContent) ...[
+        if (images.isNotEmpty && !hideContent) ...[
           const SizedBox(height: 12),
-          _buildMedia(hideMedia),
+          _buildMediaGrid(images, hideMedia),
         ],
       ],
     );
   }
 
-  Widget _buildMedia(bool blurred) {
+  Widget _buildMediaGrid(List<MediaAttachment> images, bool blurred) {
+    final count = images.length;
+
+    if (count == 1) {
+      return _buildMediaTile(images[0], 0, blurred, height: 180);
+    }
+
+    if (count == 2) {
+      return SizedBox(
+        height: 180,
+        child: Row(
+          children: [
+            Expanded(
+              child: _buildMediaTile(images[0], 0, blurred),
+            ),
+            const SizedBox(width: 4),
+            Expanded(
+              child: _buildMediaTile(images[1], 1, blurred),
+            ),
+          ],
+        ),
+      );
+    }
+
+    if (count == 3) {
+      return SizedBox(
+        height: 220,
+        child: Row(
+          children: [
+            Expanded(
+              flex: 3,
+              child: _buildMediaTile(images[0], 0, blurred),
+            ),
+            const SizedBox(width: 4),
+            Expanded(
+              flex: 2,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: _buildMediaTile(images[1], 1, blurred),
+                  ),
+                  const SizedBox(height: 4),
+                  Expanded(
+                    child: _buildMediaTile(images[2], 2, blurred),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    return SizedBox(
+      height: 220,
+      child: Column(
+        children: [
+          Expanded(
+            child: Row(
+              children: [
+                Expanded(
+                  child: _buildMediaTile(images[0], 0, blurred),
+                ),
+                const SizedBox(width: 4),
+                Expanded(
+                  child: _buildMediaTile(images[1], 1, blurred),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 4),
+          Expanded(
+            child: Row(
+              children: [
+                Expanded(
+                  child: _buildMediaTile(images[2], 2, blurred),
+                ),
+                const SizedBox(width: 4),
+                Expanded(
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      _buildMediaTile(images[3], 3, blurred),
+                      if (count > 4)
+                        Positioned.fill(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: Container(
+                              color: Colors.black.withValues(alpha: 0.6),
+                              alignment: Alignment.center,
+                              child: Text(
+                                '+${count - 4}',
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMediaTile(
+    MediaAttachment attachment,
+    int index,
+    bool blurred, {
+    double? height,
+  }) {
     return GestureDetector(
       onTap: blurred
           ? () => setState(() => _mediaRevealed = true)
-          : widget.onImageTap,
+          : () => widget.onImageTap?.call(index),
       child: Hero(
-        tag: widget.imageUrl!,
+        tag: attachment.url,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(12),
           child: Stack(
+            fit: height != null ? StackFit.loose : StackFit.expand,
             children: [
               CachedNetworkImage(
                 fit: BoxFit.cover,
-                height: 180,
+                height: height,
                 width: double.infinity,
-                imageUrl: widget.imageUrl!,
+                imageUrl: attachment.url,
                 placeholder: (_, _) => Container(
-                  height: 180,
+                  height: height,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     color: AppColors.surface,
@@ -96,7 +220,6 @@ class _TootContentWidgetState extends State<TootContentWidget>
                   ),
                 ),
               ),
-
               if (blurred)
                 Positioned.fill(
                   child: ClipRRect(
@@ -132,7 +255,7 @@ class _TootContentWidgetState extends State<TootContentWidget>
                                 ),
                               ),
                               child: Text(
-                                'SENSITIVE CONTENT — TAP TO REVEAL',
+                                'SENSITIVE — TAP',
                                 style: Theme.of(context).textTheme.labelSmall
                                     ?.copyWith(
                                       color: AppColors.warning,

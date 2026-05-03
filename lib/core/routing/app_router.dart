@@ -34,8 +34,19 @@ final GoRouter appRouter = GoRouter(
     GoRoute(
       path: '/compose',
       builder: (context, state) {
-        final quoteStatus = state.extra as Status?;
-        return ComposeScreen(quoteStatus: quoteStatus);
+        Status? quoteStatus;
+        Status? replyStatus;
+        final extra = state.extra;
+        if (extra is Map<String, dynamic>) {
+          quoteStatus = extra['quote'] as Status?;
+          replyStatus = extra['reply'] as Status?;
+        } else if (extra is Status) {
+          quoteStatus = extra;
+        }
+        return ComposeScreen(
+          quoteStatus: quoteStatus,
+          replyStatus: replyStatus,
+        );
       },
     ),
     GoRoute(

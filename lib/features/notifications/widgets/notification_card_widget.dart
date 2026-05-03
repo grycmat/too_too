@@ -115,14 +115,19 @@ class NotificationCardWidget extends StatelessWidget {
             },
             child: TootContentWidget(
               content: htmlToPlainText(status.content),
-              imageUrl: firstImageUrl(status.mediaAttachments),
-              onImageTap: () {
-                final imageUrl = firstImageUrl(status.mediaAttachments);
-                if (imageUrl != null) {
+              mediaAttachments: status.mediaAttachments,
+              onImageTap: (index) {
+                final imageUrls = status.mediaAttachments
+                    .where((a) => a.type == 'image' && a.url.isNotEmpty)
+                    .map((a) => a.url)
+                    .toList();
+                if (imageUrls.isNotEmpty) {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) =>
-                          MediaDetailsScreen(imageUrl: imageUrl),
+                      builder: (context) => MediaDetailsScreen(
+                        imageUrls: imageUrls,
+                        initialIndex: index,
+                      ),
                     ),
                   );
                 }
