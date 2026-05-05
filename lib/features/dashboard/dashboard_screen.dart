@@ -3,6 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:neon/core/di/service_locator.dart';
 import 'package:neon/core/theme/colors.dart';
 import 'package:neon/core/widgets/glow_wrapper.dart';
+import 'package:neon/features/dashboard/widgets/app_fab.widget.dart';
+import 'package:neon/features/dashboard/widgets/app_nav_rail.widget.dart';
 import 'package:neon/shared/service/instance_service.dart';
 import 'widgets/app_top_bar_widget.dart';
 import 'widgets/app_bottom_nav_widget.dart';
@@ -31,41 +33,49 @@ class DashboardScreen extends StatelessWidget {
     return Scaffold(
       extendBody: true,
       backgroundColor: AppColors.background,
-      body: Stack(
-        children: [
-          Column(children: [Expanded(child: navigationShell)]),
-          AppTopBarWidget(title: _getTopBarTitle(navigationShell.currentIndex)),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: AppBottomNavWidget(
-              currentIndex: navigationShell.currentIndex,
-              onTap: (index) => navigationShell.goBranch(
-                index,
-                initialLocation: index == navigationShell.currentIndex,
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: 80,
-            right: 20,
-            child: FloatingActionButton(
-              onPressed: () {
-                context.push('/compose');
-              },
-              child: SizedBox(
-                width: 56,
-                height: 56,
-                child: GlowWrapper(
-                  borderRadius: 50,
-                  glowColor: AppColors.primary,
-                  child: const Icon(Icons.add, size: 28),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          final isWide = constraints.maxWidth >= 600;
+
+          return Row(
+            children: [
+              if (isWide)
+                AppNavRailWidget(
+                  currentIndex: navigationShell.currentIndex,
+                  onTap: (index) => navigationShell.goBranch(
+                    index,
+                    initialLocation: index == navigationShell.currentIndex,
+                  ),
+                ),
+              Expanded(
+                child: Stack(
+                  children: [
+                    Column(children: [Expanded(child: navigationShell)]),
+                    AppTopBarWidget(
+                      title: _getTopBarTitle(navigationShell.currentIndex),
+                    ),
+                    if (!isWide)
+                      Positioned(
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        child: AppBottomNavWidget(
+                          currentIndex: navigationShell.currentIndex,
+                          onTap: (index) => navigationShell.goBranch(
+                            index,
+                            initialLocation:
+                                index == navigationShell.currentIndex,
+                          ),
+                        ),
+                      ),
+                    if (!isWide)
+                      Positioned(bottom: 80, right: 20, child: const AppFab()),
+                  ],
                 ),
               ),
-            ),
-          ),
-        ],
+            ],
+          );
+        },
       ),
     );
   }
